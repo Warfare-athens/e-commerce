@@ -8,7 +8,6 @@ import AdminProducts from "./pages/admin-view/products";
 import AdminOrders from "./pages/admin-view/orders";
 import AdminFeatures from "./pages/admin-view/features";
 import ShoppingLayout from "./components/shopping-view/layout";
-import NotFound from "./pages/not-found";
 import ShoppingHome from "./pages/shopping-view/home";
 // import ShoppingHeader from "./components/shopping-view/header";
 import ShoppingListing from "./pages/shopping-view/listing";
@@ -106,7 +105,7 @@ const [isWindow, setIsWindow] = useState('True')
           <Route path="search" element={<SearchProducts />} />
         </Route>
         <Route path="/unauth-page" element={<UnauthPage />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<ShoppingHome />} />
       </Routes>
        
       <Footer />
