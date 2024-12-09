@@ -16,6 +16,7 @@ const ProductSchema = new mongoose.Schema(
     benefits: [String], 
     ingredients: [String],
     howToUse: [String], 
+  
   },
   { timestamps: true }
 );

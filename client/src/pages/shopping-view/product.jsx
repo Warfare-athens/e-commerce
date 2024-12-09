@@ -140,48 +140,51 @@ const ProductPage = () => {
 
         </div>
         </div> 
-        {/* -------------------BENEFITS SECTION------------------  */}
-        <div className="my-10 sm:px-10 md:px-20 w-full">
-          <h1 className="text-2xl mb-4">BENEFITS −</h1>
-          <div className="flex flex-col items-center justify-between mx-0 md:mx-10 md:flex-row gap-10">
-            <div className=" md:hidden flex justify-center w-full md:w-[30%]">
-              <img
-              className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] object-cover rounded-2xl "
-              src="https://cdn.shopify.com/s/files/1/0286/5450/1993/files/Sunprotection_desk_720x.jpg?v=1576433699"
-              alt=""
-              />
-            </div>
-            <div className=" w-full md:w-[70%] flex items-center">
-              <p className=" font-satoshi-light leading-7 text-base">
-                {productDetails.benefits.map((benefit, index) => (
-                  <li key={index}>{benefit}</li>
-                ))}
-              </p>
-            </div>
-            <div className=" hidden md:block flex justify-center w-full md:w-[30%]">
-              <img
-              className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] object-cover rounded-2xl"
-              src="https://cdn.shopify.com/s/files/1/0286/5450/1993/files/Sunprotection_desk_720x.jpg?v=1576433699"
-              alt=""
-              />
+
+        <div className=" bg-neutral-200">
+            {/* -------------------BENEFITS SECTION------------------  */}
+          <div className="my-10 sm:px-10 md:px-20 w-full">
+            <h1 className="text-2xl mb-4">BENEFITS −</h1>
+            <div className="flex flex-col items-center justify-between mx-0 md:mx-10 md:flex-row gap-10">
+              <div className=" md:hidden flex justify-center w-full md:w-[30%]">
+                <img
+                className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] object-cover rounded-2xl "
+                src="https://cdn.shopify.com/s/files/1/0286/5450/1993/files/Sunprotection_desk_720x.jpg?v=1576433699"
+                alt=""
+                />
+              </div>
+              <div className=" w-full md:w-[70%] flex items-center">
+                <p className=" font-satoshi-light leading-7 text-base">
+                  {productDetails.benefits.map((benefit, index) => (
+                    <li key={index}>{benefit}</li>
+                  ))}
+                </p>
+              </div>
+              <div className=" hidden md:block flex justify-center w-full md:w-[30%]">
+                <img
+                className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] object-cover rounded-2xl"
+                src="https://cdn.shopify.com/s/files/1/0286/5450/1993/files/Sunprotection_desk_720x.jpg?v=1576433699"
+                alt=""
+                />
+              </div>
             </div>
           </div>
-        </div>
-        {/* -------------------INGREDIENTS SECTION------------------  */}
-        <div className="my-10 sm:px-10 md:px-20 w-full">
-          <h1 className="text-2xl mb-4">INGREDIENTS −</h1>
-          <div className="flex flex-col items-center mx-0 md:mx-10 md:flex-row gap-10">
-            <div className=" flex justify-center w-full md:w-[30%]">
-              <img
-              className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] object-cover rounded-2xl"
-              src="https://res.cloudinary.com/dxfzdxr8f/image/upload/v1733665904/chemical_tiekyf.jpg"
-              alt=""
-              />
-            </div>
-            <div className=" w-full md:w-[60%] flex items-center">
-              <p className=" font-satoshi-light leading-7 text-base">
-                {productDetails.ingredients.join('  ||  ')}
-              </p>
+          {/* -------------------INGREDIENTS SECTION------------------  */}
+          <div className="my-10 sm:px-10 md:px-20 w-full">
+            <h1 className="text-2xl mb-4">INGREDIENTS −</h1>
+            <div className="flex flex-col items-center mx-0 md:mx-10 md:flex-row gap-10">
+              <div className=" flex justify-center w-full md:w-[30%]">
+                <img
+                className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] object-cover rounded-2xl"
+                src="https://res.cloudinary.com/dxfzdxr8f/image/upload/v1733665904/chemical_tiekyf.jpg"
+                alt=""
+                />
+              </div>
+              <div className=" w-full md:w-[60%] flex items-center">
+                <p className=" font-satoshi-light leading-7 text-base">
+                  {productDetails.ingredients.join('  ||  ')}
+                </p>
+              </div>
             </div>
           </div>
         </div>

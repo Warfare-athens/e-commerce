@@ -21,6 +21,8 @@ import cover1 from '@/assets/cover/cover1.webp';
 import cover2 from '@/assets/cover/cover2.webp';
 import { TfiLocationArrow } from "react-icons/tfi";
 import getSessionId from "@/components/common/session";
+import VideoSection from "@/components/common/video";
+
 
 
 
@@ -202,23 +204,25 @@ function ShoppingHome() {
 
       <section className="py-12 font-satoshi ">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-medium text-center mb-8">
-            Shop By Concern
-          </h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 ">
-              {categoriesWithIcon.map((categoryItem) => (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 place-items-center">
+            {categoriesWithIcon.map((categoryItem) => (
               <div
                 key={categoryItem.id}
                 onClick={() => handleNavigateToListingPage(categoryItem, "category")}
-                className="h-32 w-32 z-10 relative cursor-pointer hover:scale-105 transition-shadow"
+                className="h-32 w-32 relative cursor-pointer rounded-xl overflow-hidden hover:scale-105 transition-shadow"
               >
-                <img src={categoryItem.icon} className=" object-cover h-full w-full " alt={categoryItem.name} />
+                <img
+                  src={categoryItem.icon}
+                  className="object-cover h-full w-full"
+                  alt={categoryItem.name}
+                />
                 <div className="absolute bottom-0 w-full bg-white/50 text-center">
-                  <span className=" text-sm text-center pb-2h-5 w-full text-black z-40 font-medium" >{categoryItem.label.toUpperCase()}</span>
+                  <span className="text-sm text-center pb-2 h-5 w-full text-black font-satoshi-medium">
+                    {categoryItem.label.toUpperCase()}
+                  </span>
                 </div>
-                
               </div>
-              ))}
+            ))}
           </div>
         </div>
       </section>
@@ -227,8 +231,8 @@ function ShoppingHome() {
         <div className="container mx-auto px-4">
         <div className="flex justify-center  items-center mb-4 space-x-4">
         <Link to="/shop/listing" className="hover:border-b-2 border-black cursor-pointer flex items-center justify-center gap-3">
-            <h2 className="text-3xl text-black h-full  text-center ">
-              Bestseller
+            <h2 className="text-3xl font-satoshi-medium text-black h-full  text-center ">
+              OUR BESTSELLER
             </h2>
             <BsArrowDownRight className=" text-black text-3xl duration-100 -rotate-45 hover:-rotate-90"/> 
           </Link>
@@ -251,15 +255,15 @@ function ShoppingHome() {
         <div className="container mx-auto px-4">
           <div className="flex justify-center  items-center mb-4 space-x-4">
             <Link to="/shop/listing" className="hover:border-b-2 border-black cursor-pointer flex items-center justify-center gap-3">
-              <h2 className="text-3xl text-black h-full  text-center ">
-                Featured Products
+              <h2 className="text-3xl font-satoshi-medium text-black h-full  text-center ">
+                FEATURED PRODUCTS
               </h2>
               <BsArrowDownRight className=" text-black text-3xl duration-100 -rotate-45 hover:-rotate-90"/> 
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
             {productList && productList.length > 0
-              ? productList.slice(2, 6).map((productItem) => (
+              ? productList.slice(0, 4).map((productItem) => (
                   <ShoppingProductTile key={productItem._id}
                     handleGetProductDetails={handleGetProductDetails}
                     product={productItem}
@@ -271,12 +275,14 @@ function ShoppingHome() {
         </div>
       </section>
 
+      <VideoSection/>
+
 
       {/* <MoveingText/> */}
 
       {/* <ProductPage  productDetails={productDetails}/> */}
 
-      <MarqueeDemo/>
+      <MarqueeDemo />
 
            
       {/* <ProductDetailsDialog

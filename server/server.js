@@ -38,7 +38,7 @@ app.use(
     cookie: { secure: false }, // Set to true if using HTTPS
   }),
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
@@ -52,7 +52,7 @@ app.use(
 );
 
 mongoose.connect(
-  'mongodb+srv://athensdubey:0P8l29gka8BOOPJr@cluster0.v395o.mongodb.net/ecom?retryWrites=true&w=majority&appName=Cluster0'
+  process.env.MONGO_URL
 ).then(console.log("MongoDb Connected"))
 .catch((error) => console.log(error))
 
