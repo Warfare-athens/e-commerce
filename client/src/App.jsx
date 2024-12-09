@@ -105,7 +105,9 @@ const [isWindow, setIsWindow] = useState('True')
           <Route path="search" element={<SearchProducts />} />
         </Route>
         <Route path="/unauth-page" element={<UnauthPage />} />
-        <Route path="*" element={<ShoppingHome />} />
+        <Route path="*" element={<ShoppingLayout/> } >
+          <Route path="*" element={<ShoppingHome/> } />
+        </Route>
       </Routes>
        
       <Footer />
