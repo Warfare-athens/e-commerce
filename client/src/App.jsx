@@ -37,7 +37,6 @@ const [isWindow, setIsWindow] = useState('True')
   }, []);
 
 
-
   const { user, isAuthenticated, isLoading } = useSelector(
     (state) => state.auth
   );
@@ -60,10 +59,10 @@ const [isWindow, setIsWindow] = useState('True')
       ) : (
         <div>
         <Routes>
-        {/* <Route path="/" element={
+        <Route path="/" element={
             <CheckAuth isAuthenticated={isAuthenticated} user={user}></CheckAuth>
           }
-        /> */}
+        />
         <Route path="/auth" element={
             <CheckAuth isAuthenticated={isAuthenticated} user={user}> 
               <AuthLayout /> 

@@ -17,8 +17,6 @@ import { useToast } from "@/hooks/use-toast"
 import { getFeatureImages } from "@/store/common-slice";
 // import { Card, CardContent } from "@/components/ui/card";
 import { MarqueeDemo } from "@/components/common/reviews";
-import cover1 from '@/assets/cover/cover1.webp';
-import cover2 from '@/assets/cover/cover2.webp';
 import { TfiLocationArrow } from "react-icons/tfi";
 import getSessionId from "@/components/common/session";
 import VideoSection from "@/components/common/video";
@@ -142,7 +140,7 @@ function ShoppingHome() {
   return (
     <div className="flex flex-col  min-h-screen">
 
-      <div>
+      {/* <div>
         <div className="flex md:flex justify-evenly md:px-16 h-[300px] md:h-[500px] w-full ">
           <div className=" h-[330px] w-[55%] md:h-[500px] md:w-[60%]  max-w-[500px] ">
             <img className=" w-full h-full" src={cover1} alt="" />
@@ -157,10 +155,10 @@ function ShoppingHome() {
           <h2 className=" font-satoshi text-2xl">Elevate Your Essence: <br/> <span className="  font-satoshi-bold"> Luxurious Care, Trusted Results. </span></h2>    
           <button className=" h-14 w-[250px] mt-3 md:mt-12 text-lg flex justify-center items-center gap-3  bg-white border-2 border-black text-black font-satoshi-medium">ORDER <TfiLocationArrow  className="rotate-90 text-2xl" /></button>
         </div>
-      </div>
+      </div> */}
       
 
-      {/* <div className="relative w-full  h-[400px] overflow-hidden">
+      <div className="relative w-full  h-[400px] overflow-hidden">
         {featureImageList && featureImageList.length > 0
           ? featureImageList.map((slide, index) => (
               <img
@@ -198,7 +196,7 @@ function ShoppingHome() {
         >
           <FaChevronRight className="w-4 h-4" />
         </Button>
-      </div>  */}
+      </div> 
 
 
 
