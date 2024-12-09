@@ -106,8 +106,7 @@ const [isWindow, setIsWindow] = useState('True')
           <Route path="search" element={<SearchProducts />} />
         </Route>
         <Route path="/unauth-page" element={<UnauthPage />} />
-        <Route path="*" element={<NotFound/> } />
-      
+        <Route path="*" element={<NotFound />} />
       </Routes>
        
       <Footer />
