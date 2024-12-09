@@ -1,12 +1,11 @@
 
 import { Link } from 'react-router-dom'
 import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
-import Wrapper from "./Wrapper";
 
 const Footer = () => {
     return (
         <footer className="font-satoshi bg-gradient-to-b	from-neutral-900 from-30%  to-black text-white pt-14 pb-3">
-            <Wrapper className="flex justify-between flex-col md:flex-row gap-[50px] md:gap-0">
+            <div className= "w-full max-w-[1280px] px-5 md:px-10 mx-auto flex justify-between flex-col md:flex-row gap-[50px] md:gap-0">
                 {/* LEFT START */}
                 <div className="flex gap-[50px] md:gap-[75px] lg:gap-[100px] flex-col md:flex-row">
                     {/* MENU START */}
@@ -102,8 +101,8 @@ const Footer = () => {
                     </div>
                 </div>
                 {/* RIGHT END */}
-            </Wrapper>
-            <Wrapper className="flex justify-between mt-10 flex-col md:flex-row gap-[10px] md:gap-0">
+            </div>
+            <div className= "w-full max-w-[1280px] px-5 md:px-10 mx-auto flex justify-between mt-10 flex-col md:flex-row gap-[10px] md:gap-0" >
                 {/* LEFT START */}
                 <div className="text-[12px] text-white/[0.5] hover:text-white cursor-pointer text-center md:text-left">
                     © 2024 company, Inc. All Rights Reserved
@@ -128,7 +127,7 @@ const Footer = () => {
                     </div>
                 </div>
                 {/* RIGHT END */}
-            </Wrapper>
+            </div>
         </footer>
     );
 };

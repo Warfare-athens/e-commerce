@@ -12,7 +12,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import getSessionId from "@/components/common/session";
 import ProductDetailsCarousel from "@/components/shopping-view/productsImagesCrousel";
-import Wrapper from "@/components/common/wrapper";
 
 const ProductPage = () => {
   const { productDetails, isLoading, productList } = useSelector((state) => state.shopProducts);
@@ -88,7 +87,7 @@ const ProductPage = () => {
 
   return (
     <div className=" w-full py-5 md:py-20 bg-gradient-to-br from-gray-50 via-gray-100 to-[#ffffff]">
-      <Wrapper>
+      <div className= "w-full max-w-[1280px] px-5 md:px-10 mx-auto ">
         <div className="flex font-satoshi flex-col lg:flex-row gap-[50px] lg:gap-[100px] w-full max-w-[1280px]  md:px-10 mx-auto">
         <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
         <ProductDetailsCarousel images={productDetails.images} />
@@ -287,7 +286,7 @@ const ProductPage = () => {
         </div>  
       </div>
 
-      </Wrapper>
+      </div>
     </div>
   );
 };
