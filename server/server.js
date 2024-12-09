@@ -2,10 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+require('dotenv').config(); 
+
+
 const authRouter = require("./routes/auth/auth-routes");
 const adminProductsRouter = require("./routes/admin/products-routes");
 const adminOrderRouter = require("./routes/admin/order-routes");
-
 const shopProductsRouter = require("./routes/shop/products-routes");
 const shopCartRouter = require("./routes/shop/cart-routes");
 const shopAddressRouter = require("./routes/shop/address-routes");
@@ -31,12 +33,6 @@ app.use(express.json());
 
 
 app.use(
-  session({
-    secret: "your_secret_key", // Replace with a strong secret key
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }, // Set to true if using HTTPS
-  }),
   cors({
     origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "DELETE", "PUT"],
@@ -48,6 +44,12 @@ app.use(
       "Pragma",
     ],
     credentials: true,
+  }),
+  session({
+    secret: "your_secret_key", // Replace with a strong secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // Set to true if using HTTPS
   })
 );
 
