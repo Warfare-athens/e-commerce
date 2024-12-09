@@ -54,15 +54,33 @@ export const registerFormControls = [
       placeholder: "Enter product description",
     },
     {
+      label: "Subtitle",
+      name: "subtitle",
+      componentType: "input",
+      type: "text",
+      placeholder: "Enter product subtitle",
+    },
+    {
+      label: "size",
+      name: "size", 
+      componentType: "input",
+      type: "text",
+      placeholder: "Enter product size",
+    },
+    {
       label: "Category",
       name: "category",
       componentType: "select",
       options: [
         { id: "men", label: "Men" },
         { id: "women", label: "Women" },
-        { id: "kids", label: "Kids" },
-        { id: "accessories", label: "Accessories" },
-        { id: "footwear", label: "Footwear" },
+        { id: "eye", label: "Eye" },
+        { id: "brain", label: "Brain" },
+        { id: "heart", label: "Heart" },
+        { id: "sleep", label: "Sleep" },
+        { id: "face", label: "Face" },
+        { id: "body", label: "Body" },
+        { id: "supplements", label: "Supplements" }
       ],
     },
     {
@@ -99,17 +117,40 @@ export const registerFormControls = [
       type: "number",
       placeholder: "Enter total stock",
     },
+    {
+      label: "Benefits",
+      name: "benefits",
+      componentType: "arrayInput",
+      placeholder: "Enter product benefits",
+    },
+    {
+      label: "Ingredients",
+      name: "ingredients",
+      componentType: "arrayInput",
+      placeholder: "Enter product ingredients",
+    },
+    {
+      label: "How to Use",
+      name: "howToUse",
+      componentType: "arrayInput",
+      placeholder: "Enter how to use instructions",
+    },
   ];
   
   export const shoppingViewHeaderMenuItems = [
     {
-      id: "home",
-      label: "Home",
-      path: "/shop/home",
+      id: "all",
+      label: "All",
+      path: "/shop/listing",
     },
     {
-      id: "products",
-      label: "Products",
+      id: "skincare",
+      label: "Skincare",
+      path: "/shop/listing",
+    },
+    {
+      id: "facecare",
+      label: "Facecare",
       path: "/shop/listing",
     },
     {
@@ -123,23 +164,28 @@ export const registerFormControls = [
       path: "/shop/listing",
     },
     {
-      id: "kids",
-      label: "Kids",
+      id: "eye",
+      label: "Eye",
       path: "/shop/listing",
     },
     {
-      id: "footwear",
-      label: "Footwear",
+      id: "braincare",
+      label: "Brain Care",
       path: "/shop/listing",
     },
     {
-      id: "accessories",
-      label: "Accessories",
+      id: "sleep",
+      label: "Sleep",
+      path: "/shop/listing",
+    },
+    {
+      id: "supplements",
+      label: "Supplements",
       path: "/shop/listing",
     },
     {
       id: "search",
-      label: "Search",
+      label: "search",
       path: "/shop/search",
     },
   ];

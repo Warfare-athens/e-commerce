@@ -10,25 +10,39 @@ import AdminFeatures from "./pages/admin-view/features";
 import ShoppingLayout from "./components/shopping-view/layout";
 import NotFound from "./pages/not-found";
 import ShoppingHome from "./pages/shopping-view/home";
+// import ShoppingHeader from "./components/shopping-view/header";
 import ShoppingListing from "./pages/shopping-view/listing";
 import ShoppingCheckout from "./pages/shopping-view/checkout";
 import ShoppingAccount from "./pages/shopping-view/account";
 import CheckAuth from "./components/common/check-auth";
 import UnauthPage from "./pages/unauth-page";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { checkAuth } from "./store/auth-slice";
 import { Skeleton } from "@/components/ui/skeleton";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
+import LoadingScreen from "./components/common/LoadingScreen";
+import Footer from "./components/common/footer";
+import ProductPage from "./pages/shopping-view/product";
 
 function App() {
+const [isWindow, setIsWindow] = useState('True')
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsWindow(false);
+    }, 1100);
+    return () => clearTimeout(timer); // Clear timeout if component unmounts
+  }, []);
+
+
+
   const { user, isAuthenticated, isLoading } = useSelector(
     (state) => state.auth
   );
-  const dispatch = useDispatch();
-  
+
+  const dispatch = useDispatch();  
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -40,11 +54,16 @@ function App() {
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
-      <Routes>
-        <Route path="/" element={
+      {/* <ShoppingHeader/> */}
+      {isWindow ? (
+        <LoadingScreen />
+      ) : (
+        <div>
+        <Routes>
+        {/* <Route path="/" element={
             <CheckAuth isAuthenticated={isAuthenticated} user={user}></CheckAuth>
           }
-        />
+        /> */}
         <Route path="/auth" element={
             <CheckAuth isAuthenticated={isAuthenticated} user={user}> 
               <AuthLayout /> 
@@ -79,6 +98,7 @@ function App() {
         >
           <Route path="home" element={<ShoppingHome />} />
           <Route path="listing" element={<ShoppingListing />} />
+          <Route path="product/:id" element={<ProductPage />} />
           <Route path="checkout" element={<ShoppingCheckout />} />
           <Route path="account" element={<ShoppingAccount />} />
           <Route path="paypal-return" element={<PaypalReturnPage />} />
@@ -88,6 +108,10 @@ function App() {
         <Route path="/unauth-page" element={<UnauthPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+       
+      <Footer />
+      </div>
+    )}
     </div>
   );
 }

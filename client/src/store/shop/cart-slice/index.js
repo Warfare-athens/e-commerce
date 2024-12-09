@@ -1,18 +1,23 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import getSessionId from "@/components/common/session";
+
 
 const initialState = {
   cartItems: [],
   isLoading: false,
 };
 
+
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ userId, productId, quantity }) => {
+    const sessionId = getSessionId()
     const response = await axios.post(
       "http://localhost:5000/api/shop/cart/add",
       {
-        userId,
+        userId: userId || null,   
+        sessionId: userId ? null : sessionId, 
         productId,
         quantity,
       }
@@ -24,14 +29,34 @@ export const addToCart = createAsyncThunk(
 
 export const fetchCartItems = createAsyncThunk(
   "cart/fetchCartItems",
-  async (userId) => {
+  async ({ userId }) => {
+    const sessionId = getSessionId(); // Ensure sessionId is retrieved
     const response = await axios.get(
-      `http://localhost:5000/api/shop/cart/get/${userId}`
+      `http://localhost:5000/api/shop/cart/get`,
+      {
+        params: {
+          userId: userId || null,
+          sessionId: userId ? null : sessionId,
+        },
+      }
     );
 
     return response.data;
   }
 );
+
+
+
+// export const fetchCartItems = createAsyncThunk(
+//   "cart/fetchCartItems",
+//   async (userId) => {
+//     const response = await axios.get(
+//       `http://localhost:5000/api/shop/cart/get/${sessionId || userId}`
+//     );
+
+//     return response.data;
+//   }
+// );
 
 export const deleteCartItem = createAsyncThunk(
   "cart/deleteCartItem",

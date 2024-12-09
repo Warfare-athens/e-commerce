@@ -12,21 +12,31 @@ const shopAddressRouter = require("./routes/shop/address-routes");
 const shopOrderRouter = require("./routes/shop/order-routes");
 const shopSearchRouter = require("./routes/shop/search-routes");
 const shopReviewRouter = require("./routes/shop/review-routes");
+const session = require("express-session");
+
 
 const commonFeatureRouter = require("./routes/common/feature-routes");
 
 //create a database connection -> u can also
 //create a separate file for this and then import/use that file here
 
-mongoose.connect(
-    'mongodb+srv://athensdubey:95MPls6EQoPk5bfs@cluster0.uqj3k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
-).then(console.log("MongoDb Connected"))
-.catch((error) => console.log(error))
+
+
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+app.use(cookieParser());
+app.use(express.json());
+
 
 app.use(
+  session({
+    secret: "your_secret_key", // Replace with a strong secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // Set to true if using HTTPS
+  }),
   cors({
     origin: "http://localhost:5173",
     methods: ["GET", "POST", "DELETE", "PUT"],
@@ -41,8 +51,16 @@ app.use(
   })
 );
 
-app.use(cookieParser());
-app.use(express.json());
+mongoose.connect(
+  'mongodb+srv://athensdubey:0P8l29gka8BOOPJr@cluster0.v395o.mongodb.net/ecom?retryWrites=true&w=majority&appName=Cluster0'
+).then(console.log("MongoDb Connected"))
+.catch((error) => console.log(error))
+
+
+
+
+
+
 app.use("/api/auth", authRouter);
 app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/orders", adminOrderRouter);

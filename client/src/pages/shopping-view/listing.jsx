@@ -1,5 +1,5 @@
 import ProductFilter from "@/components/shopping-view/filter";
-import ProductDetailsDialog from "@/components/shopping-view/product-details";
+// import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import ShoppingProductTile from "@/components/shopping-view/product-tile";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,7 +19,8 @@ import {
 import { ArrowUpDownIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
+import getSessionId from "@/components/common/session";
 
 function createSearchParamsHelper(filterParams) {
   const queryParams = [];
@@ -32,7 +33,6 @@ function createSearchParamsHelper(filterParams) {
     }
   }
 
-  console.log(queryParams, "queryParams");
 
   return queryParams.join("&");
 }
@@ -51,6 +51,7 @@ function ShoppingListing() {
   const { toast } = useToast();
 
   const categorySearchParam = searchParams.get("category");
+  
 
   function handleSort(value) {
     setSort(value);
@@ -79,14 +80,13 @@ function ShoppingListing() {
   }
 
   function handleGetProductDetails(getCurrentProductId) {
-    console.log(getCurrentProductId);
-    dispatch(fetchProductDetails(getCurrentProductId));
+    dispatch(fetchProductDetails(getCurrentProductId))
+    .then(() => Navigate(`/shop/product/${getCurrentProductId}`));
   }
 
   function handleAddtoCart(getCurrentProductId, getTotalStock) {
-    console.log(cartItems);
     let getCartItems = cartItems.items || [];
-
+  
     if (getCartItems.length) {
       const indexOfCurrentItem = getCartItems.findIndex(
         (item) => item.productId === getCurrentProductId
@@ -98,27 +98,71 @@ function ShoppingListing() {
             title: `Only ${getQuantity} quantity can be added for this item`,
             variant: "destructive",
           });
-
+  
           return;
         }
       }
     }
-
+  
+    const sessionId = getSessionId(); // Get the session ID for unauthenticated users
+  
     dispatch(
       addToCart({
-        userId: user?.id,
+        userId: user?.id || null,
+        sessionId: user ? null : sessionId,
         productId: getCurrentProductId,
         quantity: 1,
       })
     ).then((data) => {
       if (data?.payload?.success) {
-        dispatch(fetchCartItems(user?.id));
+        if (user) {
+          dispatch(fetchCartItems({ userId: user.id }));
+        } else {
+          dispatch(fetchCartItems({ sessionId }));
+        }
         toast({
           title: "Product is added to cart",
         });
       }
     });
   }
+
+  // function handleAddtoCart(getCurrentProductId, getTotalStock) {
+  //   console.log(cartItems);
+  //   let getCartItems = cartItems.items || [];
+
+  //   if (getCartItems.length) {
+  //     const indexOfCurrentItem = getCartItems.findIndex(
+  //       (item) => item.productId === getCurrentProductId
+  //     );
+  //     if (indexOfCurrentItem > -1) {
+  //       const getQuantity = getCartItems[indexOfCurrentItem].quantity;
+  //       if (getQuantity + 1 > getTotalStock) {
+  //         toast({
+  //           title: `Only ${getQuantity} quantity can be added for this item`,
+  //           variant: "destructive",
+  //         });
+
+  //         return;
+  //       }
+  //     }
+  //   }
+
+  //   dispatch(
+  //     addToCart({
+  //       userId: user?.id,
+  //       productId: getCurrentProductId,
+  //       quantity: 1,
+  //     })
+  //   ).then((data) => {
+  //     if (data?.payload?.success) {
+  //       dispatch(fetchCartItems(user?.id));
+  //       toast({
+  //         title: "Product is added to cart",
+  //       });
+  //     }
+  //   });
+  // }
 
   useEffect(() => {
     setSort("price-lowtohigh");
@@ -143,18 +187,17 @@ function ShoppingListing() {
     if (productDetails !== null) setOpenDetailsDialog(true);
   }, [productDetails]);
 
-  console.log(productList, "productListproductListproductList");
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
-      <ProductFilter filters={filters} handleFilter={handleFilter} />
-      <div className="bg-background w-full rounded-lg shadow-sm">
+    <div className=" gap-6 p-4 md:mx-8 lg:mx-12 md:p-6">
+      <div className=" w-full rounded-lg shadow-sm">
         <div className="p-4 border-b flex items-center justify-between">
-          <h2 className="text-lg font-extrabold">All Products</h2>
+          <h2 className="text-lg font-extrabold hidden md:block ">All Products</h2>
           <div className="flex items-center gap-3">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground text-sm md:text-base">
               {productList?.length} Products
             </span>
+            <ProductFilter filters={filters} handleFilter={handleFilter} />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -181,9 +224,9 @@ function ShoppingListing() {
             </DropdownMenu>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-4  mt-4">
           {productList && productList.length > 0
-            ? productList.map((productItem) => (
+            ? productList.map((productItem) => ( 
                 <ShoppingProductTile
                   handleGetProductDetails={handleGetProductDetails}
                   product={productItem}
@@ -193,11 +236,11 @@ function ShoppingListing() {
             : null}
         </div>
       </div>
-      <ProductDetailsDialog
+      {/* <ProductDetailsDialog
         open={openDetailsDialog}
         setOpen={setOpenDetailsDialog}
         productDetails={productDetails}
-      />
+      /> */}
     </div>
   );
 }

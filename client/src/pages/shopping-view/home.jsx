@@ -1,52 +1,44 @@
 import { Button } from "@/components/ui/button";
-import banner1 from "../../assets/banner1.webp";
-import banner2 from "../../assets/banner2.webp";
-import banner3 from "../../assets/banner3.webp";
-import {
-  Airplay,
-  BabyIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  CloudLightning,
-  Heater,
-  Images,
-  Shirt,
-  ShirtIcon,
-  ShoppingBasket,
-  UmbrellaIcon,
-  WashingMachine,
-  WatchIcon,
-} from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { bodyCare,brain,faceCare,sleep,heart,menFaceCare,supplements,eye} from '@/assets';
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FaChevronLeft , FaChevronRight } from "react-icons/fa6";
+import {BsArrowDownRight} from "react-icons/bs"
 import {
   fetchAllFilteredProducts,
   fetchProductDetails,
 } from "@/store/shop/products-slice";
 import ShoppingProductTile from "@/components/shopping-view/product-tile";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { useToast } from "@/hooks/use-toast"
-import ProductDetailsDialog from "@/components/shopping-view/product-details";
+// import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
+// import { Card, CardContent } from "@/components/ui/card";
+import { MarqueeDemo } from "@/components/common/reviews";
+import cover1 from '@/assets/cover/cover1.webp';
+import cover2 from '@/assets/cover/cover2.webp';
+import { TfiLocationArrow } from "react-icons/tfi";
+import getSessionId from "@/components/common/session";
+
+
+
+
+
 
 const categoriesWithIcon = [
-  { id: "men", label: "Men", icon: ShirtIcon },
-  { id: "women", label: "Women", icon: CloudLightning },
-  { id: "kids", label: "Kids", icon: BabyIcon },
-  { id: "accessories", label: "Accessories", icon: WatchIcon },
-  { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
+  { id: "bodyCare", label: "Body Care", icon: bodyCare },
+  { id: "brainCare", label: "Brain Health", icon: brain },
+  { id: "faceCare", label: "Face Care", icon: faceCare },
+  { id: "sleep", label: "Sleep", icon: sleep },
+  { id: "heart", label: "Heart", icon: heart },
+  { id: "menFaceCare", label: "Men's Face Care", icon: menFaceCare },
+  { id: "supplements", label: "Supplements", icon: supplements },
+  { id: "eye", label: "Eye", icon: eye },
 ];
 
-const brandsWithIcon = [
-  { id: "nike", label: "Nike", icon: Shirt },
-  { id: "adidas", label: "Adidas", icon: WashingMachine },
-  { id: "puma", label: "Puma", icon: ShoppingBasket },
-  { id: "levi", label: "Levi's", icon: Airplay },
-  { id: "zara", label: "Zara", icon: Images },
-  { id: "h&m", label: "H&M", icon: Heater },
-];
+
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { productList, productDetails } = useSelector(
@@ -54,7 +46,7 @@ function ShoppingHome() {
   );
   const { featureImageList } = useSelector((state) => state.commonFeature);
 
-  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+  // const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
   const { user } = useSelector((state) => state.auth);
 
@@ -73,29 +65,53 @@ function ShoppingHome() {
   }
 
   function handleGetProductDetails(getCurrentProductId) {
-    dispatch(fetchProductDetails(getCurrentProductId));
+    dispatch(fetchProductDetails(getCurrentProductId))
+    .then(() => navigate(`/shop/product/${getCurrentProductId}`));
   }
 
-  function handleAddtoCart(getCurrentProductId) {
+
+  
+  const handleAddtoCart = (productId, quantity) => {
+
+    const sessionId = getSessionId();
+  
+    const payload = {
+      productId,
+      quantity : 1,
+      userId: user?.id || null,
+      sessionId: user ? null : sessionId,
+    };
+  
     dispatch(
-      addToCart({
-        userId: user?.id,
-        productId: getCurrentProductId,
-        quantity: 1,
-      })
-    ).then((data) => {
-      if (data?.payload?.success) {
-        dispatch(fetchCartItems(user?.id));
-        toast({
-          title: "Product is added to cart",
-        });
+      addToCart(payload)).then((data) => {
+        if (data?.payload?.success) {
+            dispatch(fetchCartItems({ userId: user?.id || null, sessionId: user ? null : sessionId }));
       }
     });
-  }
+  };
 
-  useEffect(() => {
-    if (productDetails !== null) setOpenDetailsDialog(true);
-  }, [productDetails]);
+  // function handleAddtoCart(getCurrentProductId) {
+  //   dispatch(
+  //     addToCart({
+  //       userId: user?.id,
+  //       productId: getCurrentProductId,
+  //       quantity: 1,
+  //     })
+  //   ).then((data) => {
+  //     if (data?.payload?.success) {
+  //       dispatch(fetchCartItems(user?.id));
+  //       toast({
+  //         title: "Product is added to cart",
+  //       });
+  //     }
+  //   });
+  // }
+
+
+
+  // useEffect(() => {
+  //   if (productDetails !== null) setOpenDetailsDialog(true);
+  // }, [productDetails]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -114,15 +130,35 @@ function ShoppingHome() {
     );
   }, [dispatch]);
 
-  console.log(productList, "productList");
 
   useEffect(() => {
     dispatch(getFeatureImages());
   }, [dispatch]);
 
+  
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="relative w-full h-[600px] overflow-hidden">
+    <div className="flex flex-col  min-h-screen">
+
+      <div>
+        <div className="flex md:flex justify-evenly md:px-16 h-[300px] md:h-[500px] w-full ">
+          <div className=" h-[330px] w-[55%] md:h-[500px] md:w-[60%]  max-w-[500px] ">
+            <img className=" w-full h-full" src={cover1} alt="" />
+          </div>
+          <div className="h-[270px] w-[45%] md:w-[40%] md:h-[350px] max-w-[400px] ">
+            <img src={cover2} className="w-full h-full" alt="s" />       
+            <h2 className=" mt-2 hidden md:block font-satoshi text-2xl">Elevate Your Essence: <br/> <span className="  font-satoshi-bold  "> Luxurious Care, Trusted Results. </span></h2>    
+            <button className="hidden md:flex h-16 w-[300px] text-xl mt-3 justify-center items-center gap-4  bg-white border-2 border-black text-black font-satoshi-medium">ORDER <TfiLocationArrow className=" rotate-90 text-2xl " /></button>
+          </div>
+        </div>
+        <div className="flex md:hidden  pl-5 flex-col  mt-20">
+          <h2 className=" font-satoshi text-2xl">Elevate Your Essence: <br/> <span className="  font-satoshi-bold"> Luxurious Care, Trusted Results. </span></h2>    
+          <button className=" h-14 w-[250px] mt-3 md:mt-12 text-lg flex justify-center items-center gap-3  bg-white border-2 border-black text-black font-satoshi-medium">ORDER <TfiLocationArrow  className="rotate-90 text-2xl" /></button>
+        </div>
+      </div>
+      
+
+      {/* <div className="relative w-full  h-[400px] overflow-hidden">
         {featureImageList && featureImageList.length > 0
           ? featureImageList.map((slide, index) => (
               <img
@@ -130,7 +166,7 @@ function ShoppingHome() {
                 key={index}
                 className={`${
                   index === currentSlide ? "opacity-100" : "opacity-0"
-                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+                } absolute top-0 left-0 w-full px-0 lg:px-16 h-full object-cover transition-opacity duration-1000`}
               />
             ))
           : null}
@@ -144,74 +180,63 @@ function ShoppingHome() {
                 featureImageList.length
             )
           }
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80"
+          className="absolute h-20 top-1/2 left-0 md:left-4 rounded-none transform -translate-y-1/2 bg-white/80"
         >
-          <ChevronLeftIcon className="w-4 h-4" />
+          <FaChevronLeft className="w-4 h-4" />
         </Button>
         <Button
-          variant="outline"
+          variant="outline" 
           size="icon"
           onClick={() =>
             setCurrentSlide(
               (prevSlide) => (prevSlide + 1) % featureImageList.length
             )
           }
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80"
+          className="absolute h-20 rounded-none top-1/2 right-0 md:right-4 transform -translate-y-1/2 bg-white/80"
         >
-          <ChevronRightIcon className="w-4 h-4" />
+          <FaChevronRight className="w-4 h-4" />
         </Button>
-      </div>
-      <section className="py-12 bg-gray-50">
+      </div>  */}
+
+
+
+      <section className="py-12 font-satoshi ">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            Shop by category
+          <h2 className="text-3xl font-medium text-center mb-8">
+            Shop By Concern
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {categoriesWithIcon.map((categoryItem) => (
-              <Card
-                onClick={() =>
-                  handleNavigateToListingPage(categoryItem, "category")
-                }
-                className="cursor-pointer hover:shadow-lg transition-shadow"
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 ">
+              {categoriesWithIcon.map((categoryItem) => (
+              <div
+                key={categoryItem.id}
+                onClick={() => handleNavigateToListingPage(categoryItem, "category")}
+                className="h-32 w-32 z-10 relative cursor-pointer hover:scale-105 transition-shadow"
               >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{categoryItem.label}</span>
-                </CardContent>
-              </Card>
-            ))}
+                <img src={categoryItem.icon} className=" object-cover h-full w-full " alt={categoryItem.name} />
+                <div className="absolute bottom-0 w-full bg-white/50 text-center">
+                  <span className=" text-sm text-center pb-2h-5 w-full text-black z-40 font-medium" >{categoryItem.label.toUpperCase()}</span>
+                </div>
+                
+              </div>
+              ))}
           </div>
         </div>
       </section>
 
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 font-satoshi">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Shop by Brand</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {brandsWithIcon.map((brandItem) => (
-              <Card
-                onClick={() => handleNavigateToListingPage(brandItem, "brand")}
-                className="cursor-pointer hover:shadow-lg transition-shadow"
-              >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <brandItem.icon className="w-12 h-12 mb-4 text-primary" />
-                  <span className="font-bold">{brandItem.label}</span>
-                </CardContent>
-              </Card>
-            ))}
+        <div className="flex justify-center  items-center mb-4 space-x-4">
+        <Link to="/shop/listing" className="hover:border-b-2 border-black cursor-pointer flex items-center justify-center gap-3">
+            <h2 className="text-3xl text-black h-full  text-center ">
+              Bestseller
+            </h2>
+            <BsArrowDownRight className=" text-black text-3xl duration-100 -rotate-45 hover:-rotate-90"/> 
+          </Link>
           </div>
-        </div>
-      </section>
-
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            Feature Products
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
             {productList && productList.length > 0
-              ? productList.map((productItem) => (
-                  <ShoppingProductTile
+              ? productList.slice(0, 4).map((productItem) => ( 
+                  <ShoppingProductTile key={productItem._id}
                     handleGetProductDetails={handleGetProductDetails}
                     product={productItem}
                     handleAddtoCart={handleAddtoCart}
@@ -221,11 +246,45 @@ function ShoppingHome() {
           </div>
         </div>
       </section>
-      <ProductDetailsDialog
+
+      <section className="py-12 font-satoshi">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center  items-center mb-4 space-x-4">
+            <Link to="/shop/listing" className="hover:border-b-2 border-black cursor-pointer flex items-center justify-center gap-3">
+              <h2 className="text-3xl text-black h-full  text-center ">
+                Featured Products
+              </h2>
+              <BsArrowDownRight className=" text-black text-3xl duration-100 -rotate-45 hover:-rotate-90"/> 
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
+            {productList && productList.length > 0
+              ? productList.slice(2, 6).map((productItem) => (
+                  <ShoppingProductTile key={productItem._id}
+                    handleGetProductDetails={handleGetProductDetails}
+                    product={productItem}
+                    handleAddtoCart={handleAddtoCart}
+                  />
+                ))
+              : null}
+          </div>
+        </div>
+      </section>
+
+
+      {/* <MoveingText/> */}
+
+      {/* <ProductPage  productDetails={productDetails}/> */}
+
+      <MarqueeDemo/>
+
+           
+      {/* <ProductDetailsDialog
         open={openDetailsDialog}
         setOpen={setOpenDetailsDialog}
         productDetails={productDetails}
-      />
+      /> */}
+      
     </div>
   );
 }

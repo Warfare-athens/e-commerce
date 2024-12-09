@@ -1,3 +1,7 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +12,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(255, 255, 255, 222);
   background-color: #242424;
 
   font-synthesis: none;
@@ -17,42 +21,54 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 @layer base {
+  @font-face {
+    font-family: 'dior';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./assets/fonts/Helvetica.ttf') format('ttf');
+  }
   @font-face {
     font-family: 'Satoshi-light';
     font-style: normal;
     font-weight: 200;
     font-display: swap;
-    src: url(../public/Satoshi-fonts/Satoshi-Light.woff2) format('woff2');
+    src: url('./assets/fonts/Satoshi-Light.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Satoshi-regular';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(../Satoshi-fonts/Satoshi-Regular.woff2) format('woff2');
+    src: url('./assets/fonts/Satoshi-Regular.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Satoshi-medium';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url(../public/Satoshi-fonts/Satoshi-Medium.woff2) format('woff2');
+    src: url('./assets/fonts/Satoshi-Medium.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Satoshi-bold';
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(../public/Satoshi-fonts/Satoshi-Bold.woff2) format('woff2');
+    src: url('./assets/fonts/Satoshi-Bold.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Satoshi-black';
     font-style: normal;
     font-weight: 900;
     font-display: swap;
-    src: url(../public/Satoshi-fonts/Satoshi-Black.woff2) format('woff2');
+    src: url('./assets/fonts/Satoshi-Bold.woff2') format('woff2');
   }
+}
+
+body{
+  font-family: 'Satoshi-Regular , sans-serif';
 }
 
 a {
@@ -66,29 +82,6 @@ a:hover {
 
 
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -106,51 +99,52 @@ button:focus-visible {
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
   }
+
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -165,5 +159,79 @@ button:focus-visible {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+
+/* PRODUCT DETAILS CAROUSEL STYLING CUSTOMIZATION START */
+.productCarousel.carousel-root {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 15px;
+}
+.productCarousel.carousel-root .carousel {
+  width: auto;
+}
+.productCarousel.carousel-root .carousel.carousel-slider {
+  width: 100%;
+}
+.productCarousel.carousel-root .carousel.carousel-slider .slider-wrapper {
+  border-radius: 10px;
+}
+.productCarousel.carousel-root .carousel .thumbs-wrapper {
+  margin: 0;
+}
+.productCarousel.carousel-root .carousel .thumb {
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.productCarousel.carousel-root .carousel .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.productCarousel.carousel-root .carousel .thumb:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0;
+}
+.productCarousel.carousel-root .carousel .thumb.selected,
+.productCarousel.carousel-root .carousel .thumb:hover {
+  border:0;
+}
+.productCarousel.carousel-root .carousel .thumb:hover:after,
+.productCarousel.carousel-root .carousel .thumb.selected:after {
+  opacity: 0.2;
+}
+.productCarousel .control-arrow {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .productCarousel.carousel-root {
+      flex-direction: column;
+  }
+  .productCarousel.carousel-root .carousel .thumb {
+      border: 0;
+      padding: 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  .productCarousel.carousel-root .carousel .thumbs {
+      transform: none !important;
+      flex-direction: column;
+      display: flex;
+      gap: 10px;
+  }
+  .productCarousel.carousel-root .carousel .thumb {
+      border: 0;
+      padding: 0;
+      margin: 0;
   }
 }

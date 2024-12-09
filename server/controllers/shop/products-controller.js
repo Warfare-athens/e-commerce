@@ -41,18 +41,16 @@ const getFilteredProducts = async (req, res) => {
     }
 
     const products = await Product.find(filters).sort(sort);
+    
 
     res.status(200).json({
       success: true,
       data: products,
     });
-  } catch (e) {
+  }catch (error) {
     console.log(error);
-    res.status(500).json({
-      success: false,
-      message: "Some error occured",
-    });
-  }
+    res.status(500).json({ message: "Error fetching products" });
+}
 };
 
 const getProductDetails = async (req, res) => {
@@ -71,7 +69,7 @@ const getProductDetails = async (req, res) => {
       data: product,
     });
   } catch (e) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({
       success: false,
       message: "Some error occured",

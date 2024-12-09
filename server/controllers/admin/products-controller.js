@@ -24,8 +24,9 @@ const handleImageUpload = async (req, res) => {
 const addProduct = async (req, res) => {
   try {
     const {
-      image,
+      images,
       title,
+      subtitle, // Include this field
       description,
       category,
       brand,
@@ -33,13 +34,17 @@ const addProduct = async (req, res) => {
       salePrice,
       totalStock,
       averageReview,
+      benefits, // Include this field
+      ingredients,
+      howToUse, // Include this field
     } = req.body;
 
     console.log(averageReview, "averageReview");
 
     const newlyCreatedProduct = new Product({
-      image,
+      images,
       title,
+      subtitle, // Include this field
       description,
       category,
       brand,
@@ -47,6 +52,9 @@ const addProduct = async (req, res) => {
       salePrice,
       totalStock,
       averageReview,
+      benefits, 
+      ingredients,
+      howToUse, // Include this field
     });
 
     await newlyCreatedProduct.save();
