@@ -318,7 +318,7 @@
 // export default ShoppingHeader;
 
 
-import { LogOut, UserCog } from "lucide-react";
+import { LogOut, ShoppingBag, UserCog } from "lucide-react";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
@@ -448,7 +448,7 @@ function ShoppingHeader() {
   const { localCartItems } = useSelector((state) => state.localCart);
   const [openCartSheet, setOpenCartSheet] = useState(false);
 
-  const combinedCartItems = cartItems?.items?.length > 0 ? [cartItems?.items] : localCartItems;
+  const combinedCartItems = cartItems?.items?.length > 0 ? [cartItems?.items[0]] : localCartItems;
 
   console.log('combined cart ----' , combinedCartItems)
 
@@ -462,7 +462,7 @@ function ShoppingHeader() {
         <div className="font-satoshi flex items-center lg:flex-row gap-4">
           <Sheet className="bg-red-400" open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
             <div className="relative cursor-pointer flex items-center justify-center h-10 w-10">
-              <IoBagHandleOutline className="text-white w-7 h-7" onClick={() => setOpenCartSheet(true)} />
+              <ShoppingBag strokeWidth={1.25} className="text-white w-7 h-7" onClick={() => setOpenCartSheet(true)} />
               <div className="h-5 w-5 rounded-full bg-white absolute flex items-center justify-center top-[0px] right-[-6px]">
                 <span className="font-satoshi-bold text-sm">
                   {cartItems?.items?.length > 0
@@ -520,7 +520,7 @@ function ShoppingHeader() {
         <div className="lg:hidden font-satoshi flex items-center lg:flex-row gap-4">
           <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
             <div className="relative cursor-pointer flex items-center justify-center h-10 w-10">
-              <IoBagHandleOutline className="text-white w-7 h-7" onClick={() => setOpenCartSheet(true)} />
+              <ShoppingBag strokeWidth={1.25}  className="text-white w-7 h-7" onClick={() => setOpenCartSheet(true)} />
               <div className="h-5 w-5 rounded-full bg-white absolute flex items-center justify-center top-[0px] right-[-6px]">
                 <span className="font-satoshi-bold text-sm">
                   {cartItems?.items?.length > 0
@@ -536,7 +536,7 @@ function ShoppingHeader() {
               setOpenCartSheet={setOpenCartSheet}
               combinedCartItems={
                  combinedCartItems?.length > 0
-                  ? combinedCartItems[0]
+                  ? combinedCartItems
                   : []
               }
             />

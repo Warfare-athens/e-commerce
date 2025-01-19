@@ -109,7 +109,7 @@ function ShoppingHome() {
       dispatch(addLocalCartItem({
         productId: product._id,
         title: product.title,
-        images: product.images[0],
+        images: product.images,
         price: product.price,
         quantity:1,
       }));

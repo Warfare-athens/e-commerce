@@ -32,16 +32,15 @@ function UserCartWrapper({ combinedCartItems, setOpenCartSheet }) {
   // const combinedCartItems = cartItems.length > 0 ? [...cartItems] : localCartItems;
   // console.log('Redux combinedCartItems:::', combinedCartItems);
 
-  // const totalCartAmount = combinedCartItems.reduce(
-  //   (sum, currentItem) =>
-  //     sum + ((currentItem?.Price > 0 ? currentItem?.Price : currentItem?.price) * currentItem?.quantity),
-  //   0
-  // );
-
+  const totalCartAmount = combinedCartItems?.reduce(
+    (sum, currentItem) =>
+      sum + ((currentItem?.Price > 0 ? currentItem?.Price : currentItem?.price) * currentItem?.quantity),
+    0
+  );
 
 console.log('combinedCart items in wrapper ---------------------',combinedCartItems);
 
-  const totalCartAmount = 100
+
 
   const calculateProgress = (amount) => {
     if (amount > 1900) return 100;
@@ -57,48 +56,60 @@ console.log('combinedCart items in wrapper ---------------------',combinedCartIt
         <SheetTitle className="text-white mt-2 mb-4 font-satoshi-bold">Your Cart</SheetTitle>
       </SheetHeader>
 
+  <div className=" relative h-full overflow-hidden">
+
+
       <div className="mt-2">
         <div className="relative h-4 mx-2 mr-3 flex items-center font-satoshi">
           <Progress value={progress} className="mt-2 w-full" />
           <div
-            className={`absolute top-0 left-[30%] transform -translate-x-1/2 h-6 w-6 text-black pl-[7px] text-[16px] rounded-full ${
+            className={`absolute top-0 left-[30%] flex justify-center items-center w-6 text-black   rounded-full ${
               totalCartAmount > 700 ? 'bg-green-500 text-white' : 'bg-gray-300'
             }`}
           >
             {totalCartAmount > 700 ? '✓' : '1'}
           </div>
           <div
-            className={`absolute top-0 left-[60%] transform -translate-x-1/2 h-6 w-6 text-black pl-[6px] pt-[1px] text-[16px] rounded-full ${
+            className={`absolute top-0 left-[60%] flex justify-center items-center w-6  text-black   rounded-full ${
               totalCartAmount > 1400 ? 'bg-green-500 text-white' : 'bg-gray-300'
             }`}
           >
             {totalCartAmount > 1400 ? '✓' : '2'}
           </div>
           <div
-            className={`absolute top-0 left-[100%] transform -translate-x-1/2 h-6 w-6 text-black pl-[6px] pt-[1px] text-[16px] rounded-full ${
+            className={`absolute top-0 left-[95%] flex justify-center items-center w-6   text-black  rounded-full ${
               totalCartAmount > 1900 ? 'bg-green-500 text-white' : 'bg-gray-300'
             }`}
           >
             {totalCartAmount > 1900 ? '✓' : '3'}
           </div>
         </div>
+        <div className=" relative w-full mt-2 font-satoshi-light text-sm ">
+            <div className=" absolute left-[29%]">
+              Gift 1
+            </div>
+            <div className=" absolute left-[58%]">
+              Gift 2
+            </div>
+            <div className=" absolute left-[90%]">
+              Gift 3
+            </div>
+          </div>
       </div>
 
-      <div className="mt-2 text-black space-y-4">
-        
-        
-        {combinedCartItems > 0
-          ? combinedCartItems.map((item) => (
-              <UserCartItemsContent key={item.productId} cartItem={item} />
+      <div className="mt-8 text-black  space-y-4">
+        {combinedCartItems
+            ? combinedCartItems.map((item) => (
+                <UserCartItemsContent key={item.productId} cartItem={item} />
             ))
           : <p>Your cart is empty.</p>}
-
-
       </div>
-      <div className="mx-3">
-        <div className="flex justify-between px-2 border-t border-black pt-1 font-satoshi-medium">
+
+
+      <div className=" absolute bottom-0 w-full px-3 mt-2">
+        <div className="flex justify-between  border-t border-black pt-1  font-satoshi-medium">
           <span>Total</span>
-          <span>₹{totalCartAmount}</span>
+          <span >₹{totalCartAmount}</span>
         </div>
         <Button
           onClick={() => {
@@ -110,6 +121,10 @@ console.log('combinedCart items in wrapper ---------------------',combinedCartIt
           Checkout
         </Button>
       </div>
+
+
+  </div>
+
     </SheetContent>
   );
 }
