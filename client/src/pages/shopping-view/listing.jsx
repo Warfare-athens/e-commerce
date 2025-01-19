@@ -11,16 +11,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast"
 import { sortOptions } from "@/config";
-import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
-import {
-  fetchAllFilteredProducts,
-  fetchProductDetails,
-} from "@/store/shop/products-slice";
+import { addToCart, fetchCartItems } from "@/store/shop/cart-slice/index.js";
+import { addLocalCartItem, setLocalCartItems } from "@/store/shop/localcart-slice";
+import {fetchAllFilteredProducts,fetchProductDetails,} from "@/store/shop/products-slice";
 import { ArrowUpDownIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useSearchParams } from "react-router-dom";
-import getSessionId from "@/components/common/session";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
 
 function createSearchParamsHelper(filterParams) {
   const queryParams = [];
@@ -44,10 +42,12 @@ function ShoppingListing() {
   );
   const { cartItems } = useSelector((state) => state.shopCart);
   const { user } = useSelector((state) => state.auth);
+  console.log('listing page user:::::::::' , user);
+  
+  const navigate = useNavigate();
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
   const { toast } = useToast();
 
   const categorySearchParam = searchParams.get("category");
@@ -81,88 +81,49 @@ function ShoppingListing() {
 
   function handleGetProductDetails(getCurrentProductId) {
     dispatch(fetchProductDetails(getCurrentProductId))
-    .then(() => Navigate(`/shop/product/${getCurrentProductId}`));
+    .then(() => navigate(`/product/${getCurrentProductId}`));
   }
 
-  function handleAddtoCart(getCurrentProductId, getTotalStock) {
-    let getCartItems = cartItems.items || [];
-  
-    if (getCartItems.length) {
-      const indexOfCurrentItem = getCartItems.findIndex(
-        (item) => item.productId === getCurrentProductId
-      );
-      if (indexOfCurrentItem > -1) {
-        const getQuantity = getCartItems[indexOfCurrentItem].quantity;
-        if (getQuantity + 1 > getTotalStock) {
-          toast({
-            title: `Only ${getQuantity} quantity can be added for this item`,
-            variant: "destructive",
-          });
-  
-          return;
-        }
-      }
-    }
-  
-    const sessionId = getSessionId(); // Get the session ID for unauthenticated users
-  
-    dispatch(
-      addToCart({
-        userId: user?.id || null,
-        sessionId: user ? null : sessionId,
-        productId: getCurrentProductId,
-        quantity: 1,
-      })
-    ).then((data) => {
-      if (data?.payload?.success) {
-        if (user) {
+
+
+  const handleAddToCart = (product, quantity) => {
+    if (user) {
+      dispatch(addToCart({ userId: user.id, productId: product._id, quantity })).then((data) => {
+        if (data?.payload?.success) {
           dispatch(fetchCartItems({ userId: user.id }));
-        } else {
-          dispatch(fetchCartItems({ sessionId }));
+          toast({ title: "Product is added to cart" });
         }
-        toast({
-          title: "Product is added to cart",
-        });
-      }
-    });
-  }
+      });
+    } else {
+      // Logic for unauthenticated users
+      dispatch(addLocalCartItem({
+        productId: product._id,
+        title: product?.title,
+        images: product?.images[0],
+        price: product?.price,
+        quantity: 1,
+      }));
+      // setLocalCartItems(JSON.parse(localStorage.getItem('cartItems')));
+      // console.log('listingPage LocalCartItems check', localStorage.getItem('cartItems'));
+      toast({ title: "Product is added to cart" });
+    }
+  };
 
-  // function handleAddtoCart(getCurrentProductId, getTotalStock) {
-  //   console.log(cartItems);
-  //   let getCartItems = cartItems.items || [];
+  
+    
 
-  //   if (getCartItems.length) {
-  //     const indexOfCurrentItem = getCartItems.findIndex(
-  //       (item) => item.productId === getCurrentProductId
-  //     );
-  //     if (indexOfCurrentItem > -1) {
-  //       const getQuantity = getCartItems[indexOfCurrentItem].quantity;
-  //       if (getQuantity + 1 > getTotalStock) {
-  //         toast({
-  //           title: `Only ${getQuantity} quantity can be added for this item`,
-  //           variant: "destructive",
-  //         });
 
-  //         return;
-  //       }
-  //     }
-  //   }
 
-  //   dispatch(
-  //     addToCart({
-  //       userId: user?.id,
-  //       productId: getCurrentProductId,
-  //       quantity: 1,
-  //     })
-  //   ).then((data) => {
-  //     if (data?.payload?.success) {
-  //       dispatch(fetchCartItems(user?.id));
-  //       toast({
-  //         title: "Product is added to cart",
-  //       });
-  //     }
-  //   });
-  // }
+  // const logLocalCartItems = () => {
+  //   const localCartItems = getLocalCartItems();
+  //   console.log('Local Cart Items:::::::::::::::::::::::::::::::::::::', localCartItems);
+  // };
+
+  useEffect(() => {
+    if (!user) {
+      
+    }
+  }, [user]);  
 
   useEffect(() => {
     setSort("price-lowtohigh");
@@ -189,10 +150,10 @@ function ShoppingListing() {
 
 
   return (
-    <div className=" gap-6 p-4 md:mx-8 lg:mx-12 md:p-6">
+    <div className=" font-satoshi bg-[#e2dfda] gap-6 p-2 md:px-8 md:p-6 lg:px-12  xl:px-20">
       <div className=" w-full rounded-lg shadow-sm">
-        <div className="p-4 border-b flex items-center justify-between">
-          <h2 className="text-lg font-extrabold hidden md:block ">All Products</h2>
+        <div className="p-2 border-b flex items-center justify-between">
+          <h2 className="text-lg font-satoshi-medium  hidden md:block ">All Products</h2>
           <div className="flex items-center gap-3">
             <span className="text-muted-foreground text-sm md:text-base">
               {productList?.length} Products
@@ -224,23 +185,18 @@ function ShoppingListing() {
             </DropdownMenu>
           </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-4  mt-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4  gap-2 md:gap-4  mt-4">
           {productList && productList.length > 0
             ? productList.map((productItem) => ( 
                 <ShoppingProductTile
                   handleGetProductDetails={handleGetProductDetails}
                   product={productItem}
-                  handleAddtoCart={handleAddtoCart}
+                  handleAddtoCart={handleAddToCart}
                 />
               ))
             : null}
         </div>
       </div>
-      {/* <ProductDetailsDialog
-        open={openDetailsDialog}
-        setOpen={setOpenDetailsDialog}
-        productDetails={productDetails}
-      /> */}
     </div>
   );
 }

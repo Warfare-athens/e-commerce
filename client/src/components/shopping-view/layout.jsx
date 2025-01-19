@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import ShoppingHeader from "./header";
+// import ErrorBoundary from "../common/errorBoundary";
 
 function ShoppingLayout() {
   return (
@@ -7,7 +8,9 @@ function ShoppingLayout() {
       {/* common header */}
       <ShoppingHeader />
       <main className="flex flex-col w-full">
+        {/* <ErrorBoundary> */}
         <Outlet />
+        {/* </ErrorBoundary> */}
       </main>
     </div>
   );

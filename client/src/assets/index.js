@@ -7,6 +7,7 @@ import heart from "./categories/heart.jpg";
 import menFaceCare from "./categories/menFaceCare.webp";
 import supplements from "./categories/supplements.webp";
 import eye from "./categories/eye.jpg";
+import bg1 from './bg/bg1.png'
 // import serum from "./serum.jpg";
 // import moisturizer from "./moisturizer.jpg";
 
@@ -19,7 +20,8 @@ export {
   heart,
   menFaceCare,
   supplements,
-  eye
+  eye,
+  bg1
 //   serum,
 //   moisturizer
 };

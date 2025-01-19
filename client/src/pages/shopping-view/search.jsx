@@ -1,5 +1,4 @@
 // import ProductDetailsDialog from "@/components/shopping-view/product-details";
-import getSessionId from "@/components/common/session";
 import ShoppingProductTile from "@/components/shopping-view/product-tile";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast"
@@ -66,8 +65,7 @@ function SearchProducts() {
       })
     ).then((data) => {
       if (data?.payload?.success) {
-        const sessionId = getSessionId();
-        dispatch(fetchCartItems({ userId: user?.id || null, sessionId: user ? null : sessionId }));
+        dispatch(fetchCartItems(user?.id));
         toast({
           title: "Product is added to cart",
         });

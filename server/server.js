@@ -14,7 +14,7 @@ const shopAddressRouter = require("./routes/shop/address-routes");
 const shopOrderRouter = require("./routes/shop/order-routes");
 const shopSearchRouter = require("./routes/shop/search-routes");
 const shopReviewRouter = require("./routes/shop/review-routes");
-const session = require("express-session");
+
 
 
 const commonFeatureRouter = require("./routes/common/feature-routes");
@@ -44,12 +44,6 @@ app.use(
       "Pragma",
     ],
     credentials: true,
-  }),
-  session({
-    secret: "your_secret_key", // Replace with a strong secret key
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }, // Set to true if using HTTPS
   })
 );
 

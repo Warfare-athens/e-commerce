@@ -16,25 +16,17 @@ import ShoppingAccount from "./pages/shopping-view/account";
 import CheckAuth from "./components/common/check-auth";
 import UnauthPage from "./pages/unauth-page";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { checkAuth } from "./store/auth-slice";
 import { Skeleton } from "@/components/ui/skeleton";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
-import LoadingScreen from "./components/common/LoadingScreen";
 import Footer from "./components/common/footer";
 import ProductPage from "./pages/shopping-view/product";
 import NotFound from "./pages/not-found";
 
 function App() {
-const [isWindow, setIsWindow] = useState('True')
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsWindow(false);
-    }, 1100);
-    return () => clearTimeout(timer); // Clear timeout if component unmounts
-  }, []);
 
 
   const { user, isAuthenticated, isLoading } = useSelector(
@@ -49,14 +41,11 @@ const [isWindow, setIsWindow] = useState('True')
 
   if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
 
-  console.log(isLoading, user);
+  console.log( 'isLoading :', isLoading, user);
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       {/* <ShoppingHeader/> */}
-      {isWindow ? (
-        <LoadingScreen />
-      ) : (
         <div>
         <Routes>
         <Route path="/" element={
@@ -88,13 +77,9 @@ const [isWindow, setIsWindow] = useState('True')
         </Route>
 
 
-        <Route  path="/shop"
-          element={
-            // <CheckAuth isAuthenticated={isAuthenticated}  user={user}>
-              <ShoppingLayout />
-            // </CheckAuth>
-          }
-        >
+ 
+        <Route path="" element={<ShoppingLayout/> } >
+
           <Route path="home" element={<ShoppingHome />} />
           <Route path="listing" element={<ShoppingListing />} />
           <Route path="product/:id" element={<ProductPage />} />
@@ -103,14 +88,20 @@ const [isWindow, setIsWindow] = useState('True')
           <Route path="paypal-return" element={<PaypalReturnPage />} />
           <Route path="payment-success" element={<PaymentSuccessPage />} />
           <Route path="search" element={<SearchProducts />} />
+
         </Route>
+
+
+
+
         <Route path="/unauth-page" element={<UnauthPage />} />
         <Route path="*" element={<NotFound />} />
+        
       </Routes>
        
       <Footer />
       </div>
-    )}
+    
     </div>
   );
 }

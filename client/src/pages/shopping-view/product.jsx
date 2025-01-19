@@ -10,7 +10,6 @@ import { useToast } from "@/hooks/use-toast";
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import getSessionId from "@/components/common/session";
 import ProductDetailsCarousel from "@/components/shopping-view/productsImagesCrousel";
 
 const ProductPage = () => {
@@ -50,18 +49,16 @@ const ProductPage = () => {
       }
     }
   
-    const sessionId = getSessionId();
   
     dispatch(
       addToCart({
-        userId: user?.id || null,
-        sessionId: user ? null : sessionId,
+        userId: user?.id ,
         productId: getCurrentProductId,
         quantity: 1,
       })
     ).then((data) => {
       if (data?.payload?.success) {
-        dispatch(fetchCartItems({ userId: user?.id || null, sessionId: user ? null : sessionId }));
+        dispatch(fetchCartItems( user?.id ));
         toast({
           title: "Product is added to cart",
         });
@@ -86,7 +83,7 @@ const ProductPage = () => {
   }
 
   return (
-    <div className=" w-full py-5 md:py-20 bg-gradient-to-br from-gray-50 via-gray-100 to-[#ffffff]">
+    <div className=" w-full py-5 lg:py-20 bg-gradient-to-br bg-neutral-100">
       <div className= "w-full max-w-[1280px] px-5 md:px-10 mx-auto ">
         <div className="flex font-satoshi flex-col lg:flex-row gap-[50px] lg:gap-[100px] w-full max-w-[1280px]  md:px-10 mx-auto">
         <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
@@ -140,10 +137,10 @@ const ProductPage = () => {
         </div>
         </div> 
 
-        <div className=" bg-neutral-200">
+        <div className=" ">
             {/* -------------------BENEFITS SECTION------------------  */}
           <div className="my-10 sm:px-10 md:px-20 w-full">
-            <h1 className="text-2xl mb-4">BENEFITS −</h1>
+            <h1 className=" font-satoshi-medium text-2xl mb-4">BENEFITS −</h1>
             <div className="flex flex-col items-center justify-between mx-0 md:mx-10 md:flex-row gap-10">
               <div className=" md:hidden flex justify-center w-full md:w-[30%]">
                 <img
@@ -170,12 +167,12 @@ const ProductPage = () => {
           </div>
           {/* -------------------INGREDIENTS SECTION------------------  */}
           <div className="my-10 sm:px-10 md:px-20 w-full">
-            <h1 className="text-2xl mb-4">INGREDIENTS −</h1>
+            <h1 className=" font-satoshi-medium text-2xl mb-4">INGREDIENTS −</h1>
             <div className="flex flex-col items-center mx-0 md:mx-10 md:flex-row gap-10">
               <div className=" flex justify-center w-full md:w-[30%]">
                 <img
                 className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] object-cover rounded-2xl"
-                src="https://res.cloudinary.com/dxfzdxr8f/image/upload/v1733665904/chemical_tiekyf.jpg"
+                src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/topic_centers/2019-4/11980-BEAUTY_-_EXPLAINER_-_Most_Powerful_Ingredient_Combos_for_Your_Shelf-header-1296x728.jpg?w=1155&h=1528"
                 alt=""
                 />
               </div>
@@ -188,8 +185,8 @@ const ProductPage = () => {
           </div>
         </div>
 
-      <div className=" sm:px-10 md:px-20 w-full max">
-        <Accordion type="single" collapsible className="font-satoshi my-5 md:my-10 w-full">
+      <div className=" sm:px-10 my-5 md:my-16 md:px-20 w-full max">
+        <Accordion type="single" collapsible className="font-satoshi  w-full">
     
           <AccordionItem value="item-1">
             <AccordionTrigger className=" font-satoshi-medium  border-b-[1px] border-black text-xl ">HOW TO USE ?</AccordionTrigger>
@@ -211,8 +208,8 @@ const ProductPage = () => {
         </Accordion>
       </div>
 
-      <div className=" my-10 sm:px-10 md:px-20 w-full">
-        <h2 className="font-satoshi-medium text-2xl underline pb-5">RELATED PRODUCTS -</h2>
+      <div className=" my-10  w-full  ">
+        <h2 className="font-satoshi-bold text-2xl pb-5">RELATED PRODUCTS -</h2>
         {productList && productList.length > 0
           ? (
             <Carousel
@@ -226,18 +223,18 @@ const ProductPage = () => {
               }}
               className="w-full"
             >
-              <CarouselContent>
+              <CarouselContent className=" gap-4 lg:gap-8">
                 {productList.map((productItem) => (
-                    <Link key={productItem._id} to={`/shop/product/${productItem._id}`}>
-                        <CarouselItem key={productItem._id} className=" text-black basis-1/2 sm:basis-1/3 lg:basis-1/4">
-                            <div className="flex flex-col h-56 w-40 sm:h-64 sm:w-52 lg:h-64 lg:w-52 border border-neutral-300 overflow-hidden rounded-lg">
-                            <div className="aspect-square mx-2 my-2 flex overflow-hidden justify-center bg-neutral-200 items-center">
-                                <img className="object-cover h-full w-full rounded-md" src={productItem?.images[0]} alt={productItem?.title} />
-                            </div>
-                            <div className="mb-2">
-                                <h3 className="font-satoshi-medium text-lg px-2">{productItem?.title}</h3>
-                                <h3 className="font-satoshi text-lg px-2">₹{productItem?.price}</h3>
-                            </div>
+                    <Link key={productItem._id} to={`/product/${productItem._id}`}>
+                        <CarouselItem key={productItem._id} className="  text-black basis-1/2 sm:basis-1/3 lg:basis-1/4">
+                            <div className=" flex flex-col  justify-around  h-72 w-52 md:h-96 md:w-64 border border-neutral-300 overflow-hidden rounded-lg">
+                              <div className="aspect-square mx-2 my-2  h-full  flex overflow-hidden justify-center bg-neutral-200 ">
+                                  <img className="object-cover h-full w-full rounded-md" src={productItem?.images[0]} alt={productItem?.title} />
+                              </div>
+                              <div className="mb-2 w-40 md:w-60">
+                                  <h3 className="font-satoshi-medium text-base md:text-lg px-2">{productItem?.title}</h3>
+                                  <h3 className="font-satoshi text-lg px-2">₹{productItem?.price}</h3>
+                              </div>
                             </div>
                         </CarouselItem>
                     </Link>

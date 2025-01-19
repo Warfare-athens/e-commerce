@@ -17,17 +17,16 @@ const VideoSection = () => {
   };
 
   return (
-    <section className="py-12 xl:mx-32 font-satoshi">
+    <section className="pt-12 pb-20 xl:mx-32 font-satoshi">
       <div className="container mx-auto px-4">
         <div className="flex justify-center items-center mb-4 space-x-4">
-          <h2 className="text-3xl font-satoshi-medium text-black text-center">
+          <h2 className="text-2xl sm:text-3xl mb-5 font-satoshi-medium text-black text-center">
             MANUFACTURING INSIGHTS
           </h2>
         </div>
-        <div className="relative overflow-hidden  w-full">
+        <div className="relative overflow-hidden xl:h-[600px] w-full">
           <video
             ref={videoRef}
-            muted
             className="w-full rounded-lg"
           >
             <source

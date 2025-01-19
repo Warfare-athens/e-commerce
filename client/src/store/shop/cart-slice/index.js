@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import getSessionId from "@/components/common/session";
 
 
 const initialState = {
@@ -12,12 +11,10 @@ const initialState = {
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ userId, productId, quantity }) => {
-    const sessionId = getSessionId()
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/shop/cart/add`,
       {
-        userId: userId || null,   
-        sessionId: userId ? null : sessionId, 
+        userId: userId || null,
         productId,
         quantity,
       }
@@ -27,36 +24,18 @@ export const addToCart = createAsyncThunk(
   }
 );
 
+
 export const fetchCartItems = createAsyncThunk(
   "cart/fetchCartItems",
-  async ({ userId }) => {
-    const sessionId = getSessionId(); // Ensure sessionId is retrieved
+  async (userId) => {
+    
     const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/shop/cart/get`,
-      {
-        params: {
-          userId: userId || null,
-          sessionId: userId ? null : sessionId,
-        },
-      }
+      `${import.meta.env.VITE_API_URL}/api/shop/cart/get/${userId}`
     );
 
     return response.data;
   }
 );
-
-
-
-// export const fetchCartItems = createAsyncThunk(
-//   "cart/fetchCartItems",
-//   async (userId) => {
-//     const response = await axios.get(
-//       `${import.meta.env.VITE_API_URL}/api/shop/cart/get/${sessionId || userId}`
-//     );
-
-//     return response.data;
-//   }
-// );
 
 export const deleteCartItem = createAsyncThunk(
   "cart/deleteCartItem",
@@ -85,6 +64,8 @@ export const updateCartQuantity = createAsyncThunk(
   }
 );
 
+
+
 const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState,
@@ -98,9 +79,10 @@ const shoppingCartSlice = createSlice({
         state.isLoading = false;
         state.cartItems = action.payload.data;
       })
-      .addCase(addToCart.rejected, (state) => {
+      .addCase(addToCart.rejected, (state,  action) => {
         state.isLoading = false;
         state.cartItems = [];
+        console.error("Add to cart failed:", action.payload);
       })
       .addCase(fetchCartItems.pending, (state) => {
         state.isLoading = true;

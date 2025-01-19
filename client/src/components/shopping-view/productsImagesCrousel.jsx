@@ -14,7 +14,7 @@ const ProductDetailsCarousel = ({ images }) => {
                 className="productCarousel"                
             >
                 {images?.map((img, index) => (
-                    <img className=" bg-gray-200 "
+                    <img className=" bg-gray-200  "
                         key={index} // Use `index` as the key
                         src={img.src || img} // Adjust based on your image object structure
                         alt={img.alt || `Image ${index + 1}`} // Provide a fallback for alt

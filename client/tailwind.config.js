@@ -94,6 +94,18 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+	screens: {
+		'sm': '350px',
+		// => @media (min-width: 350px) { ... }
+		'md': '600px',
+		// => @media (min-width: 768px) { ... }  
+		'lg': '900px',
+		// => @media (min-width: 1024px) { ... }
+		'xl': '1250px',
+		// => @media (min-width: 1280px) { ... }
+		'@xl': '1400px',
+		// => @media (min-width: 1280px) { ... }
+	},
 	fontFamily: {
 		'dior': ['dior"', 'serif'],
 		'satoshi': ['Satoshi-regular', 'sans-serif'],

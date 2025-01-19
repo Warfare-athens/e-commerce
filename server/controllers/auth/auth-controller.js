@@ -37,57 +37,29 @@ const registerUser = async (req, res) => {
   }
 };
 
+
+
+
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const checkUser = await User.findOne({ email });
-    if (!checkUser) {
+    if (!checkUser)
       return res.json({
         success: false,
-        message: "User doesn't exist! Please register first",
+        message: "User doesn't exists! Please register first",
       });
-    }
 
-    const checkPasswordMatch = await bcrypt.compare(password, checkUser.password);
-    if (!checkPasswordMatch) {
+    const checkPasswordMatch = await bcrypt.compare(
+      password,
+      checkUser.password
+    );
+    if (!checkPasswordMatch)
       return res.json({
         success: false,
         message: "Incorrect password! Please try again",
       });
-    }
-
-    // Merge cart logic
-    const sessionId = req.session.id;
-    const sessionCart = await Cart.findOne({ sessionId });
-    const userCart = await Cart.findOne({ userId: checkUser._id });
-
-    if (sessionCart) {
-      if (userCart) {
-        // Merge session cart items into user cart
-        sessionCart.items.forEach((sessionItem) => {
-          const userItemIndex = userCart.items.findIndex(
-            (userItem) => userItem.productId.toString() === sessionItem.productId.toString()
-          );
-
-          if (userItemIndex > -1) {
-            // If product exists in user cart, update quantity
-            userCart.items[userItemIndex].quantity += sessionItem.quantity;
-          } else {
-            // If product does not exist, add it to user cart
-            userCart.items.push(sessionItem);
-          }
-        });
-
-        await userCart.save();
-        await Cart.deleteOne({ sessionId }); // Remove session cart after merging
-      } else {
-        // If no user cart exists, assign session cart to user
-        sessionCart.userId = checkUser._id;
-        sessionCart.sessionId = null;
-        await sessionCart.save();
-      }
-    }
 
     const token = jwt.sign(
       {
@@ -115,64 +87,10 @@ const loginUser = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occurred",
+      message: "Some error occured",
     });
   }
 };
-
-
-
-// const loginUser = async (req, res) => {
-//   const { email, password } = req.body;
-
-//   try {
-//     const checkUser = await User.findOne({ email });
-//     if (!checkUser)
-//       return res.json({
-//         success: false,
-//         message: "User doesn't exists! Please register first",
-//       });
-
-//     const checkPasswordMatch = await bcrypt.compare(
-//       password,
-//       checkUser.password
-//     );
-//     if (!checkPasswordMatch)
-//       return res.json({
-//         success: false,
-//         message: "Incorrect password! Please try again",
-//       });
-
-//     const token = jwt.sign(
-//       {
-//         id: checkUser._id,
-//         role: checkUser.role,
-//         email: checkUser.email,
-//         userName: checkUser.userName,
-//       },
-//       "CLIENT_SECRET_KEY",
-//       { expiresIn: "15d" }
-//     );
-
-//     res.cookie("token", token, { httpOnly: true, secure: false }).json({
-//       success: true,
-//       message: "Logged in successfully",
-//       maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days in milliseconds
-//       user: {
-//         email: checkUser.email,
-//         role: checkUser.role,
-//         id: checkUser._id,
-//         userName: checkUser.userName,
-//       },
-//     });
-//   } catch (e) {
-//     console.log(e);
-//     res.status(500).json({
-//       success: false,
-//       message: "Some error occured",
-//     });
-//   }
-// };
 
 //logout
 

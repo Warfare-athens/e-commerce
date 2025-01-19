@@ -5,11 +5,7 @@ const CartSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: false, // Make sure this is not required
-    },
-    sessionId: {
-      type: String,
-      default: null,
+      required: true,
     },
     items: [
       {
