@@ -229,7 +229,7 @@ function ShoppingHome() {
           <div >
             <div className=" w-32 h-48 lg:w-52 lg:h-80 overflow-hidden">
               <img className=" rounded-2xl md:rounded-3xl w-full h-full"
-              src="http://res.cloudinary.com/dxfzdxr8f/image/upload/v1733730303/sytwezrtrklmkzcso47z.webp" alt="" />
+              src="https://res.cloudinary.com/dxfzdxr8f/image/upload/v1733730303/sytwezrtrklmkzcso47z.webp" alt="" />
             </div>
             <h5 className=" mt-2 text-black text-center font-satoshi-medium text-sm">MOISTURIZER</h5>
           </div>
@@ -237,7 +237,7 @@ function ShoppingHome() {
           <div className=" ">
             <div className=" w-28 h-36  lg:w-48 lg:h-64 overflow-hidden">
               <img className="rounded-2xl md:rounded-3xl w-full h-full"
-              src="http://res.cloudinary.com/dxfzdxr8f/image/upload/v1733655783/ij45ojunkws2fesu4udl.webp" alt="" />
+              src="https://res.cloudinary.com/dxfzdxr8f/image/upload/v1733655783/ij45ojunkws2fesu4udl.webp" alt="" />
             </div>
             <h5 className=" mt-2 text-black text-center font-satoshi-medium text-sm">SERUM</h5>
           </div>
@@ -245,7 +245,7 @@ function ShoppingHome() {
           <div >
             <div className="  w-24 h-24  lg:w-36 lg:h-36 overflow-hidden">
               <img className="rounded-2xl md:rounded-3xl w-full h-full"
-              src="http://res.cloudinary.com/dxfzdxr8f/image/upload/v1733931909/intfmujcuqpgambashew.webp" alt="" />
+              src="https://res.cloudinary.com/dxfzdxr8f/image/upload/v1733931909/intfmujcuqpgambashew.webp" alt="" />
             </div>
             <h5 className=" mt-2 text-black text-center font-satoshi-medium text-sm">SUNSCREEN</h5>
           </div>
