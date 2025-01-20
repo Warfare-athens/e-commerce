@@ -17,7 +17,6 @@ import { useToast } from "@/hooks/use-toast"
 // import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
 // import { Card, CardContent } from "@/components/ui/card";
-import { MarqueeDemo } from "@/components/common/reviews";
 import VideoSection from "@/components/common/video";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import useEmblaCarousel from 'embla-carousel-react'
@@ -428,7 +427,7 @@ function ShoppingHome() {
 
       {/* <ProductPage  productDetails={productDetails}/> */}
 
-      <MarqueeDemo />
+      {/* <MarqueeDemo /> */}
 
            
       {/* <ProductDetailsDialog
