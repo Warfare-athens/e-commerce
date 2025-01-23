@@ -1,9 +1,9 @@
-const paypal = require("../../helpers/paypal");
-const Order = require("../../models/Order");
-const Cart = require("../../models/Cart");
-const Product = require("../../models/Product");
+import paypal from "../../helpers/paypal.js";
+import Order from "../../models/Order.js";
+import Cart from "../../models/Cart.js";
+import Product from "../../models/Product.js";
 
-const createOrder = async (req, res) => {
+export const createOrder = async (req, res) => {
   try {
     const {
       userId,
@@ -95,7 +95,7 @@ const createOrder = async (req, res) => {
   }
 };
 
-const capturePayment = async (req, res) => {
+export const capturePayment = async (req, res) => {
   try {
     const { paymentId, payerId, orderId } = req.body;
 
@@ -147,7 +147,7 @@ const capturePayment = async (req, res) => {
   }
 };
 
-const getAllOrdersByUser = async (req, res) => {
+export const getAllOrdersByUser = async (req, res) => {
   try {
     const { userId } = req.params;
 
@@ -173,7 +173,7 @@ const getAllOrdersByUser = async (req, res) => {
   }
 };
 
-const getOrderDetails = async (req, res) => {
+export const getOrderDetails = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -197,11 +197,4 @@ const getOrderDetails = async (req, res) => {
       message: "Some error occured!",
     });
   }
-};
-
-module.exports = {
-  createOrder,
-  capturePayment,
-  getAllOrdersByUser,
-  getOrderDetails,
 };

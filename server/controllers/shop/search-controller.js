@@ -1,6 +1,7 @@
-const Product = require("../../models/Product");
 
-const searchProducts = async (req, res) => {
+import Product from "../../models/Product.js";
+
+export const searchProducts = async (req, res) => {
   try {
     const { keyword } = req.params;
     if (!keyword || typeof keyword !== "string") {
@@ -35,5 +36,3 @@ const searchProducts = async (req, res) => {
     });
   }
 };
-
-module.exports = { searchProducts };

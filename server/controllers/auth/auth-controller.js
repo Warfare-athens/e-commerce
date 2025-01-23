@@ -1,11 +1,12 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../../models/User");
-const Cart = require("../../models/Cart");
+
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import User from "../../models/User.js";
+import Cart  from "../../models/Cart.js";
 
 
 //register
-const registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
 
   try {
@@ -40,7 +41,7 @@ const registerUser = async (req, res) => {
 
 
 
-const loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -94,7 +95,7 @@ const loginUser = async (req, res) => {
 
 //logout
 
-const logoutUser = (req, res) => {
+export const logoutUser = (req, res) => {
   res.clearCookie("token").json({
     success: true,
     message: "Logged out successfully!",
@@ -102,7 +103,7 @@ const logoutUser = (req, res) => {
 };
 
 //auth middleware
-const authMiddleware = async (req, res, next) => {
+export const authMiddleware = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token)
     return res.status(401).json({
@@ -121,5 +122,3 @@ const authMiddleware = async (req, res, next) => {
     });
   }
 };
-
-module.exports = { registerUser, loginUser, logoutUser, authMiddleware };

@@ -1,6 +1,6 @@
-const Product = require("../../models/Product");
+import Product from "../../models/Product.js";
 
-const getFilteredProducts = async (req, res) => {
+export const getFilteredProducts = async (req, res) => {
   try {
     const { category = [], brand = [], sortBy = "price-lowtohigh" } = req.query;
 
@@ -53,7 +53,7 @@ const getFilteredProducts = async (req, res) => {
 }
 };
 
-const getProductDetails = async (req, res) => {
+export const getProductDetails = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findById(id);
@@ -76,5 +76,3 @@ const getProductDetails = async (req, res) => {
     });
   }
 };
-
-module.exports = { getFilteredProducts, getProductDetails };

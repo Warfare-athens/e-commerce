@@ -1,7 +1,7 @@
-const Cart = require("../../models/Cart");
-const Product = require("../../models/Product");
+import Cart from "../../models/Cart.js";
+import Product from "../../models/Product.js";
 
-const addToCart = async (req, res) => {
+export const addToCart = async (req, res) => {
   try {
     const { userId, productId, quantity } = req.body;
 
@@ -51,13 +51,13 @@ const addToCart = async (req, res) => {
   }
 };
 
-const fetchCartItems = async (req, res) => {
+export const fetchCartItems = async (req, res) => {
   try {
     const { userId } = req.params;
 
-    if (!userId) {
-      return res.status(400).json({
-        success: false,
+    if (!userId || userId === undefined) {
+      return res.status(200).json({
+        success: true,
         message: "User id is manadatory!",
       });
     }
@@ -110,7 +110,7 @@ const fetchCartItems = async (req, res) => {
 
 
 
-const updateCartItemQty = async (req, res) => {
+export const updateCartItemQty = async (req, res) => {
   try {
     const { userId, productId, quantity } = req.body;
 
@@ -173,7 +173,7 @@ const updateCartItemQty = async (req, res) => {
   }
 };
 
-const deleteCartItem = async (req, res) => {
+export  const deleteCartItem = async (req, res) => {
   try {
     const { userId, productId } = req.params;
     if (!userId || !productId) {
@@ -229,11 +229,4 @@ const deleteCartItem = async (req, res) => {
       message: "Error",
     });
   }
-};
-
-module.exports = {
-  addToCart,
-  updateCartItemQty,
-  deleteCartItem,
-  fetchCartItems,
 };

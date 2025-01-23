@@ -1,7 +1,7 @@
-const { imageUploadUtil } = require("../../helpers/cloudinary");
-const Product = require("../../models/Product");
+import { imageUploadUtil } from "../../helpers/cloudinary.js";
+import Product from "../../models/Product.js";
 
-const handleImageUpload = async (req, res) => {
+export const handleImageUpload = async (req, res) => {
   try {
     const b64 = Buffer.from(req.file.buffer).toString("base64");
     const url = "data:" + req.file.mimetype + ";base64," + b64;
@@ -15,18 +15,17 @@ const handleImageUpload = async (req, res) => {
     console.log(error);
     res.json({
       success: false,
-      message: "Error occured",
+      message: "Error occurred",
     });
   }
 };
 
-//add a new product
-const addProduct = async (req, res) => {
+export const addProduct = async (req, res) => {
   try {
     const {
       images,
       title,
-      subtitle, // Include this field
+      subtitle,
       description,
       category,
       brand,
@@ -34,9 +33,9 @@ const addProduct = async (req, res) => {
       salePrice,
       totalStock,
       averageReview,
-      benefits, // Include this field
+      benefits,
       ingredients,
-      howToUse, // Include this field
+      howToUse,
     } = req.body;
 
     console.log(averageReview, "averageReview");
@@ -44,7 +43,7 @@ const addProduct = async (req, res) => {
     const newlyCreatedProduct = new Product({
       images,
       title,
-      subtitle, // Include this field
+      subtitle,
       description,
       category,
       brand,
@@ -52,9 +51,9 @@ const addProduct = async (req, res) => {
       salePrice,
       totalStock,
       averageReview,
-      benefits, 
+      benefits,
       ingredients,
-      howToUse, // Include this field
+      howToUse,
     });
 
     await newlyCreatedProduct.save();
@@ -66,14 +65,12 @@ const addProduct = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error occured",
+      message: "Error occurred",
     });
   }
 };
 
-//fetch all products
-
-const fetchAllProducts = async (req, res) => {
+export const fetchAllProducts = async (req, res) => {
   try {
     const listOfProducts = await Product.find({});
     res.status(200).json({
@@ -84,13 +81,12 @@ const fetchAllProducts = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error occured",
+      message: "Error occurred",
     });
   }
 };
 
-//edit a product
-const editProduct = async (req, res) => {
+export const editProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const {
@@ -132,13 +128,12 @@ const editProduct = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error occured",
+      message: "Error occurred",
     });
   }
 };
 
-//delete a product
-const deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findByIdAndDelete(id);
@@ -151,21 +146,13 @@ const deleteProduct = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Product delete successfully",
+      message: "Product deleted successfully",
     });
   } catch (e) {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error occured",
+      message: "Error occurred",
     });
   }
-};
-
-module.exports = {
-  handleImageUpload,
-  addProduct,
-  fetchAllProducts,
-  editProduct,
-  deleteProduct,
 };
