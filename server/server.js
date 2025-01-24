@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(urlencoded({extended:true}));
 
 
-const _dirname = path.resolve();
+const __dirname = path.resolve();
 
 
 app.use(
@@ -65,10 +65,10 @@ app.use("/api/shop/review", shopReviewRouter);
 
 app.use("/api/common/feature", commonFeatureRouter);
 
-app.use(express.static(path.join(_dirname, "/client/dist")));
+app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(_dirname, "client", "dist", "index.html"));
+  res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
 })
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
