@@ -7,7 +7,7 @@ function NotFound() {
       <h1 className=" text-4xl md:text-6xl font-satoshi-medium" > No Page Found  </h1>
       <h2 className=" text-2xl md:text-3xl mt-5 font-satoshi"> Return to Home page</h2>
       <button className="  mt-10 font-satoshi-medium px-10 py-4 ml-3 my-7 rounded-full bg-black text-white"
-          onClick={() => { navigate("/shop/home")}}
+          onClick={() => { navigate("/")}}
       >        
             HOME PAGE
           </button>

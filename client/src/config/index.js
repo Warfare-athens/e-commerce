@@ -141,52 +141,52 @@ export const registerFormControls = [
     {
       id: "all",
       label: "All",
-      path: "/shop/listing",
+      path: "/listing",
     },
     {
       id: "skincare",
       label: "Skincare",
-      path: "/shop/listing",
+      path: "/listing",
     },
     {
       id: "facecare",
       label: "Facecare",
-      path: "/shop/listing",
+      path: "/listing",
     },
     {
       id: "men",
       label: "Men",
-      path: "/shop/listing",
+      path: "/listing",
     },
     {
       id: "women",
       label: "Women",
-      path: "/shop/listing",
+      path: "/listing",
     },
     {
       id: "eye",
       label: "Eye",
-      path: "/shop/listing",
+      path: "/listing",
     },
     {
       id: "braincare",
       label: "Brain Care",
-      path: "/shop/listing",
+      path: "/listing",
     },
     {
       id: "sleep",
       label: "Sleep",
-      path: "/shop/listing",
+      path: "/listing",
     },
     {
       id: "supplements",
       label: "Supplements",
-      path: "/shop/listing",
+      path: "/listing",
     },
     {
       id: "search",
       label: "search",
-      path: "/shop/search",
+      path: "/search",
     },
   ];
   

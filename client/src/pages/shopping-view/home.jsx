@@ -318,8 +318,7 @@ function ShoppingHome() {
                   <ShoppingProductTile key={productItem._id}
                     handleGetProductDetails={handleGetProductDetails}
                     product={productItem}
-                    handleAddtoCart={handleAddToCart
-                    }
+                    handleAddtoCart={handleAddToCart}
                   />
                 ))
               : null}

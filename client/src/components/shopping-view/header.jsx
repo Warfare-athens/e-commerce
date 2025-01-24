@@ -358,7 +358,7 @@ function MenuItems() {
   }
   return (
     <nav className="font-satoshi flex flex-col text-white mb-3 lg:mb-0 lg:items-center gap-5 lg:flex-row">
-      <Link to="/home" className="lg:hidden flex flex-col justify-center items-center mt-8 mb-16">
+      <Link to="/" className="lg:hidden flex flex-col justify-center items-center mt-8 mb-16">
         <span className="font-dior text-white font-medium text-4xl">HUME</span>
       </Link>
       {shoppingViewHeaderMenuItems.map((menuItem, index) => (
@@ -458,7 +458,7 @@ function ShoppingHeader() {
     <header className="sticky top-0 z-40 w-full bg-background">
       <div className="bg-neutral-900 hidden lg:flex h-16 items-center justify-between px-4 md:px-12 lg:px-16">
         <HeaderRightContent />
-        <Link to="/home" className="flex flex-col justify-center items-center">
+        <Link to="/" className="flex flex-col justify-center items-center">
           <span className="font-dior text-white font-medium text-3xl">HUME</span>
         </Link>
         <div className="font-satoshi flex items-center lg:flex-row gap-4">
@@ -499,7 +499,7 @@ function ShoppingHeader() {
           </SheetTrigger>
           <SheetContent side="left" className="flex flex-col items-center justify-between bg-gradient-to-l from-black to-neutral-900 w-full max-w-xs">
             <nav className="flex flex-col text-white mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
-              <Link to="/home" className="lg:hidden flex flex-col justify-center items-center mt-8 mb-16">
+              <Link to="/" className="lg:hidden flex flex-col justify-center items-center mt-8 mb-16">
                 <span className="font-dior text-white font-medium text-4xl">HUME</span>
               </Link>
               {shoppingViewHeaderMenuItems.map((menuItem) => (
@@ -515,7 +515,7 @@ function ShoppingHeader() {
             <HeaderRightContent />
           </SheetContent>
         </Sheet>
-        <Link to="/home" className="lg:hidden md:flex flex-col justify-center items-center">
+        <Link to="/" className="lg:hidden md:flex flex-col justify-center items-center">
           <span className="font-dior text-white font-medium text-3xl">HUME</span>
         </Link>
 

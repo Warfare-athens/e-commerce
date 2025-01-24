@@ -26,7 +26,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('./assets/fonts/Helvetica.ttf') format('ttf');
+    src: url('./assets/fonts/BentonModDispComp-Regular.otf') format('otf');
   }
   @font-face {
     font-family: 'Satoshi-light';

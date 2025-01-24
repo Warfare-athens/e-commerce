@@ -86,26 +86,30 @@ function ShoppingListing() {
 
 
 
-  const handleAddToCart = (product, quantity) => {
-    if (user) {
-      dispatch(addToCart({ userId: user.id, productId: product._id, quantity })).then((data) => {
+  const handleAddToCart = (product) => {
+    // console.log('prodcut----------------',product);
+    // console.log( 'user id check in handle Add to cart ----------' , user);
+    
+    if (!user){
+      // Logic for unauthenticated user
+      // console.log( 'we are in else block');
+      dispatch(addLocalCartItem({
+        productId: product._id,
+        title: product.title,
+        images: product.images,
+        price: product.price,
+        quantity:1,
+      }));
+      toast({ title: "Product is added to cart" });
+    }
+    else if (user){      
+      console.log(  'user-----------' , user)
+      dispatch(addToCart({ userId: user?.id, productId: product._id, quantity:1 })).then((data) => {
         if (data?.payload?.success) {
-          dispatch(fetchCartItems({ userId: user.id }));
+          dispatch(fetchCartItems(user?.id));
           toast({ title: "Product is added to cart" });
         }
       });
-    } else {
-      // Logic for unauthenticated users
-      dispatch(addLocalCartItem({
-        productId: product._id,
-        title: product?.title,
-        images: product?.images[0],
-        price: product?.price,
-        quantity: 1,
-      }));
-      // setLocalCartItems(JSON.parse(localStorage.getItem('cartItems')));
-      // console.log('listingPage LocalCartItems check', localStorage.getItem('cartItems'));
-      toast({ title: "Product is added to cart" });
     }
   };
 
@@ -119,11 +123,6 @@ function ShoppingListing() {
   //   console.log('Local Cart Items:::::::::::::::::::::::::::::::::::::', localCartItems);
   // };
 
-  useEffect(() => {
-    if (!user) {
-      
-    }
-  }, [user]);  
 
   useEffect(() => {
     setSort("price-lowtohigh");
