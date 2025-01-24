@@ -5,7 +5,7 @@
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
+import { SheetContent, SheetFooter, SheetHeader, SheetTitle } from "../ui/sheet";
 import UserCartItemsContent from "./cart-items-content";
 
 
@@ -53,10 +53,10 @@ console.log('combinedCart items in wrapper ---------------------',combinedCartIt
   return (
     <SheetContent className="overflow-scroll overflow-x-hidden bg-gradient-to-br from-white via-neutral-100 to-neutral-50 text-black sm:max-w-md">
       <SheetHeader className="bg-black">
-        <SheetTitle className="text-white mt-2 mb-4 font-satoshi-bold">Your Cart</SheetTitle>
+        <SheetTitle className="text-white text-center mt-3 mb-4 font-satoshi-bold">Your Cart</SheetTitle>
       </SheetHeader>
 
-  <div className=" relative h-full overflow-hidden">
+  {/* <div className=" relative  overflow-hidden"> */}
 
 
       <div className="mt-2">
@@ -106,8 +106,8 @@ console.log('combinedCart items in wrapper ---------------------',combinedCartIt
       </div>
 
 
-      <div className=" absolute bottom-0 w-full px-3 mt-2">
-        <div className="flex justify-between  border-t border-black pt-1  font-satoshi-medium">
+      <SheetFooter className=" flex flex-col absolute bottom-0 mb-1 px-2 mt-1 w-full">
+        <div className="flex justify-between px-2 border-t border-black  pt-[2px]  font-satoshi-medium">
           <span>Total</span>
           <span >₹{totalCartAmount}</span>
         </div>
@@ -116,14 +116,14 @@ console.log('combinedCart items in wrapper ---------------------',combinedCartIt
             navigate("/checkout");
             setOpenCartSheet(false);
           }}
-          className="w-full mt-1 font-satoshi-medium"
+          className="w-full  font-satoshi-medium"
         >
           Checkout
         </Button>
-      </div>
+      </SheetFooter>
 
 
-  </div>
+  {/* </div> */}
 
     </SheetContent>
   );
