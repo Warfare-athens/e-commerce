@@ -13,12 +13,12 @@ import ShoppingHome from "./pages/shopping-view/home";
 import ShoppingListing from "./pages/shopping-view/listing";
 import ShoppingCheckout from "./pages/shopping-view/checkout";
 import ShoppingAccount from "./pages/shopping-view/account";
-import CheckAuth from "./components/common/check-auth";
 import UnauthPage from "./pages/unauth-page";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { checkAuth } from "./store/auth-slice";
-import { Skeleton } from "@/components/ui/skeleton";
+// import CheckAuth from "./components/common/check-auth";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { checkAuth } from "./store/auth-slice";
+// import { Skeleton } from "@/components/ui/skeleton";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
@@ -29,19 +29,19 @@ import NotFound from "./pages/not-found";
 function App() {
 
 
-  const { user, isAuthenticated, isLoading } = useSelector(
-    (state) => state.auth
-  );
+  // const { user, isAuthenticated, isLoading } = useSelector(
+  //   (state) => state.auth
+  // );
 
-  const dispatch = useDispatch();  
+  // const dispatch = useDispatch();  
 
-  useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(checkAuth());
+  // }, [dispatch]);
 
-  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+  // if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
 
-  console.log( 'isLoading :', isLoading, user);
+  // console.log( 'isLoading :', isLoading, user);
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
@@ -49,13 +49,14 @@ function App() {
         <div>
         <Routes>
         <Route path="/" element={
-            <CheckAuth isAuthenticated={isAuthenticated} user={user}></CheckAuth>
+            // <CheckAuth isAuthenticated={isAuthenticated} user={user}></CheckAuth>
+            <ShoppingHome />
           }
         />
         <Route path="/auth" element={
-            <CheckAuth isAuthenticated={isAuthenticated} user={user}> 
+            // <CheckAuth isAuthenticated={isAuthenticated} user={user}> 
               <AuthLayout /> 
-            </CheckAuth>
+            // </CheckAuth>
           }
         >
           <Route path="login" element={<AuthLogin />} />
@@ -65,9 +66,9 @@ function App() {
 
         <Route  path="/admin"  
           element={
-            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            // <CheckAuth isAuthenticated={isAuthenticated} user={user}>
               <AdminLayout />
-            </CheckAuth>
+            // </CheckAuth>
           }
         >
           <Route path="dashboard" element={<AdminDashboard />} />

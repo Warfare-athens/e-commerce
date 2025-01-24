@@ -320,7 +320,7 @@
 
 import { LogOut, ShoppingBag, UserCog } from "lucide-react";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
-import { IoBagHandleOutline } from "react-icons/io5";
+// import { IoBagHandleOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
@@ -437,7 +437,9 @@ function ShoppingHeader() {
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(fetchCartItems(user?.id));
+    if (user) {
+      dispatch(fetchCartItems(user?.id));
+    }
   }, [dispatch, user]);
 
   
