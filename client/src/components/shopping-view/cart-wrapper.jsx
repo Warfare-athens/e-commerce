@@ -106,7 +106,7 @@ console.log('combinedCart items in wrapper ---------------------',combinedCartIt
       </div>
 
 
-      <SheetFooter className=" flex flex-col absolute bottom-0 mb-1 px-2 mt-1 w-full">
+      <SheetFooter className=" flex flex-col absolute bottom-0 mb-2 px-2 mt-1 w-full">
         <div className="flex justify-between px-2 border-t border-black  pt-[2px]  font-satoshi-medium">
           <span>Total</span>
           <span >₹{totalCartAmount}</span>
@@ -116,7 +116,7 @@ console.log('combinedCart items in wrapper ---------------------',combinedCartIt
             navigate("/checkout");
             setOpenCartSheet(false);
           }}
-          className="w-full  font-satoshi-medium"
+          className="w-full h-[45px]  font-satoshi-medium"
         >
           Checkout
         </Button>

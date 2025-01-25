@@ -11,7 +11,7 @@ function UserCartItemsContent({ cartItem }) {
 
 
 
-  console.log('cartitems in cart content ----' , cartItem)
+  // console.log('cartitems in cart content ----' , cartItem)
 
 
  
@@ -65,7 +65,7 @@ function UserCartItemsContent({ cartItem }) {
       <img
         src={cartItem?.images[0]}
         alt={cartItem?.title}
-        className="sm:w-24 sm:h-24 w-16 h-16 bg-neutral-200 mr-2 sm:mr-3 rounded object-cover"
+        className="sm:min-w-24 sm:h-24 w-16 h-16 bg-neutral-200 mr-2 sm:mr-3 rounded object-cover"
       />
 
       <div className="flex flex-col justify-between h-full w-full">

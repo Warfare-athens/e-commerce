@@ -18,9 +18,10 @@ import { useToast } from "@/hooks/use-toast"
 import { getFeatureImages } from "@/store/common-slice";
 // import { Card, CardContent } from "@/components/ui/card";
 import VideoSection from "@/components/common/video";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+// import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
+import ImageSlider from "@/components/common/instacardCrousel";
 
 
 
@@ -277,31 +278,6 @@ function ShoppingHome() {
       </section>
 
 
-      {/* <section className="pt-12 font-satoshi ">
-        <div className="container mx-auto xl:px-32 ">
-          <div className="grid grid-cols-2  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 place-items-center">
-            {categoriesWithIcon.map((categoryItem) => (
-              <div
-                key={categoryItem.id}
-                onClick={() => handleNavigateToListingPage(categoryItem, "category")}
-                className="h-28 w-28 mb-4 relative cursor-pointer rounded-xl overflow-hidden hover:scale-105 shadow-xl "
-              >
-                <img
-                  src={categoryItem.icon}
-                  className="object-cover h-full w-full"
-                  alt={categoryItem.name}
-                />
-                <div className="absolute bottom-0 w-full bg-white/50 text-center">
-                  <span className="text-sm text-center pb-2 h-5 w-full text-black font-satoshi-medium">
-                    {categoryItem.label.toUpperCase()}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
       <section className="py-12  font-satoshi">
         <div className=" px-2  xl:px-28">
           <div className="flex justify-center  items-center mb-4 space-x-4">
@@ -322,6 +298,31 @@ function ShoppingHome() {
                   />
                 ))
               : null}
+          </div>
+        </div>
+      </section>
+
+      <section className="pt-12 font-satoshi ">
+        <div className=" xl:px-24 ">
+          <div className="grid grid-cols-2  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 place-items-center">
+            {categoriesWithIcon.map((categoryItem) => (
+              <div
+                key={categoryItem.id}
+                onClick={() => handleNavigateToListingPage(categoryItem, "category")}
+                className=" h-24 w-24 md:h-28 md:w-28 mb-4 relative cursor-pointer rounded-xl overflow-hidden hover:scale-105 shadow-xl "
+              >
+                <img
+                  src={categoryItem.icon}
+                  className="object-cover h-full w-full"
+                  alt={categoryItem.name}
+                />
+                <div className="absolute bottom-0 w-full bg-white/50 text-center">
+                  <span className="text-sm text-center pb-2 h-5 w-full text-black font-satoshi-medium">
+                    {categoryItem.label.toUpperCase()}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -348,8 +349,7 @@ function ShoppingHome() {
               : null}
           </div>
         </div>
-      </section>
-
+      </section>      
       
 
       <section className=' bg-[#212123] text-white  '  >
@@ -422,11 +422,10 @@ function ShoppingHome() {
 
       <VideoSection/>
 
+
+      <ImageSlider/>
+
       {/* <MoveingText/> */}
-
-      {/* <ProductPage  productDetails={productDetails}/> */}
-
-      {/* <MarqueeDemo /> */}
 
            
       {/* <ProductDetailsDialog

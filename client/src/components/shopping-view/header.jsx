@@ -445,14 +445,10 @@ function ShoppingHeader() {
   
 
   const { cartItems } = useSelector((state) => state.shopCart);
-  console.log('cart items in header ----' , cartItems );
-  
   const { localCartItems } = useSelector((state) => state.localCart);
   const [openCartSheet, setOpenCartSheet] = useState(false);
 
   const combinedCartItems = cartItems?.items?.length > 0 ? [cartItems?.items[0]] : localCartItems;
-
-  console.log('combined cart ----' , combinedCartItems)
 
   return (
     <header className="sticky top-0 z-40 w-full bg-background">

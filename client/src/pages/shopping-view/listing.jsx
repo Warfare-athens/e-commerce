@@ -12,7 +12,7 @@ import {
 import { useToast } from "@/hooks/use-toast"
 import { sortOptions } from "@/config";
 import { addToCart, fetchCartItems } from "@/store/shop/cart-slice/index.js";
-import { addLocalCartItem, setLocalCartItems } from "@/store/shop/localcart-slice";
+import { addLocalCartItem } from "@/store/shop/localcart-slice/index.js";
 import {fetchAllFilteredProducts,fetchProductDetails,} from "@/store/shop/products-slice";
 import { ArrowUpDownIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -40,7 +40,7 @@ function ShoppingListing() {
   const { productList, productDetails } = useSelector(
     (state) => state.shopProducts
   );
-  const { cartItems } = useSelector((state) => state.shopCart);
+  // const { cartItems } = useSelector((state) => state.shopCart);
   const { user } = useSelector((state) => state.auth);
   console.log('listing page user:::::::::' , user);
   
@@ -103,7 +103,7 @@ function ShoppingListing() {
       toast({ title: "Product is added to cart" });
     }
     else if (user){      
-      console.log(  'user-----------' , user)
+      // console.log(  'user-----------' , user)
       dispatch(addToCart({ userId: user?.id, productId: product._id, quantity:1 })).then((data) => {
         if (data?.payload?.success) {
           dispatch(fetchCartItems(user?.id));
@@ -143,9 +143,7 @@ function ShoppingListing() {
       );
   }, [dispatch, sort, filters]);
 
-  useEffect(() => {
-    if (productDetails !== null) setOpenDetailsDialog(true);
-  }, [productDetails]);
+
 
 
   return (
