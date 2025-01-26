@@ -130,11 +130,11 @@ function ShoppingCheckout() {
                 ? "Processing Paypal Payment..."
                 : "Checkout with Paypal"}
             </Button> */}
-            <Button  className="w-full  font-satoshi ">
-              <Link to="/payment-success" className="text-white " >
-                Checkout 
-              </Link>
-            </Button>
+            <Link to="/payment-success" className="text-white " >
+              <Button  className="w-full  font-satoshi-medium text-base ">
+                  Checkout 
+              </Button>
+            </Link>
 
 
           </div>
