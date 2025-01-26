@@ -5,14 +5,15 @@ import UserCartItemsContent from "@/components/shopping-view/cart-items-content"
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { createNewOrder } from "@/store/shop/order-slice";
-import { Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast"
 
 function ShoppingCheckout() {
   
+  const nagivate = useNavigate();
   const { cartItems } = useSelector((state) => state.shopCart);
   const { localCartItems } = useSelector((state) => state.localCart);
-  const combinedCartItems = cartItems?.items?.length > 0 ? [cartItems?.items[0]] : localCartItems;  
+  const combinedCartItems = cartItems?.items?.length > 0 ? [...cartItems?.items] : localCartItems;  
   
   const { user } = useSelector((state) => state.auth);
   const { approvalURL } = useSelector((state) => state.shopOrder);
@@ -122,11 +123,20 @@ function ShoppingCheckout() {
             </div>
           </div>
           <div className="mt-4 w-full">
-            <Button onClick={handleInitiatePaypalPayment} className="w-full font-satoshi ">
+
+
+            {/* <Button onClick={handleInitiatePaypalPayment} className="w-full font-satoshi ">
               {isPaymentStart
                 ? "Processing Paypal Payment..."
                 : "Checkout with Paypal"}
+            </Button> */}
+            <Button  className="w-full  font-satoshi ">
+              <Link to="/payment-success" className="text-white " >
+                Checkout 
+              </Link>
             </Button>
+
+
           </div>
         </div>
       </div>

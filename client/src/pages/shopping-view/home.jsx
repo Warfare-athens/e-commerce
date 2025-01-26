@@ -302,7 +302,7 @@ function ShoppingHome() {
         </div>
       </section>
 
-      <section className="pt-12 font-satoshi ">
+      {/* <section className="pt-12 font-satoshi ">
         <div className=" xl:px-24 ">
           <div className="grid grid-cols-2  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 place-items-center">
             {categoriesWithIcon.map((categoryItem) => (
@@ -325,7 +325,7 @@ function ShoppingHome() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="py-12  font-satoshi">
         <div className=" px-2  xl:px-28">
@@ -420,10 +420,12 @@ function ShoppingHome() {
       </section>
 
 
+      <ImageSlider/>
+
       <VideoSection/>
 
 
-      <ImageSlider/>
+      
 
       {/* <MoveingText/> */}
 

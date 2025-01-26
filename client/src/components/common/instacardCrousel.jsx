@@ -142,9 +142,9 @@ const ImageSlider = () => {
     left4: { x: "-180%", scale: 0.2, zIndex: 0 },
   };
   return (
-    <div className=" relative flex items-center flex-col justify-center h-[600px] lg:h-screen ">
+    <div className=" relative flex mt-10 items-center flex-col justify-center min-h-[600px] lg:h-screen ">
 
-      <h2 className="absolute flex-wrap top-0 text-2xl md:text-3xl font-satoshi-medium   bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+      <h2 className="absolute flex-wrap top-0 text-3xl  md:text-3xl font-satoshi-medium   bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-500 bg-clip-text text-transparent">
       In the Spotlight: <span className=" block md:inline">Stunning Posts</span>
       </h2>
 
