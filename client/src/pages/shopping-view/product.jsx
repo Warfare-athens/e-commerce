@@ -139,8 +139,8 @@ const ProductPage = () => {
 
         <div className=" ">
             {/* -------------------BENEFITS SECTION------------------  */}
-          <div className="my-10 sm:px-10 md:px-20 w-full">
-            <h1 className=" font-satoshi-medium text-2xl mb-4">BENEFITS −</h1>
+          <div className="my-10  md:px-20 w-full">
+            <h1 className="  text-2xl mb-4 font-dior">BENEFITS −</h1>
             <div className="flex flex-col items-center justify-between mx-0 md:mx-10 md:flex-row gap-10">
               <div className=" md:hidden flex justify-center w-full md:w-[30%]">
                 <img
@@ -166,8 +166,8 @@ const ProductPage = () => {
             </div>
           </div>
           {/* -------------------INGREDIENTS SECTION------------------  */}
-          <div className="my-10 sm:px-10 md:px-20 w-full">
-            <h1 className=" font-satoshi-medium text-2xl mb-4">INGREDIENTS −</h1>
+          <div className="my-10  md:px-20 w-full">
+            <h1 className=" font-dior text-2xl mb-4">INGREDIENTS −</h1>
             <div className="flex flex-col items-center mx-0 md:mx-10 md:flex-row gap-10">
               <div className=" flex justify-center w-full md:w-[30%]">
                 <img
@@ -185,28 +185,28 @@ const ProductPage = () => {
           </div>
         </div>
 
-      <div className=" sm:px-10 my-5 md:my-16 md:px-20 w-full max">
-        <Accordion type="single" collapsible className="font-satoshi  w-full">
-    
-          <AccordionItem value="item-1">
-            <AccordionTrigger className=" font-satoshi-medium  border-b-[1px] border-black text-xl ">HOW TO USE ?</AccordionTrigger>
-            <AccordionContent className="font-satoshi-light text-md px-1">
-              <p className=" font-satoshi-light  text-base">
-                {productDetails.howToUse.map((benefit, index) => (
-                  <li key={index}>{benefit}</li>
-                ))}
-              </p>
-            </AccordionContent>
-          </AccordionItem>    
-         
-          <AccordionItem value="item-2">
-            <AccordionTrigger className=" font-satoshi-medium  border-b-[1px] border-black text-xl ">Q / A 's </AccordionTrigger>
-            <AccordionContent className="font-satoshi-light text-md px-1">
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </div>
+        <div className="  my-5 md:my-16 md:px-20 w-full max">
+          <Accordion type="single" collapsible className="font-satoshi  w-full">
+      
+            <AccordionItem value="item-1">
+              <AccordionTrigger className=" font-satoshi-medium  border-b-[1px] border-black text-xl ">HOW TO USE ?</AccordionTrigger>
+              <AccordionContent className="font-satoshi-light text-md px-1">
+                <p className=" font-satoshi-light  text-base">
+                  {productDetails.howToUse.map((benefit, index) => (
+                    <li key={index}>{benefit}</li>
+                  ))}
+                </p>
+              </AccordionContent>
+            </AccordionItem>    
+          
+            <AccordionItem value="item-2">
+              <AccordionTrigger className=" font-satoshi-medium  border-b-[1px] border-black text-xl ">Q / A 's </AccordionTrigger>
+              <AccordionContent className="font-satoshi-light text-md px-1">
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
 
       <div className=" my-10  w-full  ">
         <h2 className="font-satoshi-bold text-2xl pb-5">RELATED PRODUCTS -</h2>

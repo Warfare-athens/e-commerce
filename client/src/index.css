@@ -249,3 +249,8 @@ a:hover {
   display: inline-block; /* Ensure proper display */
 
 }
+
+.navbar {
+ position: sticky;
+ top:  0;
+}

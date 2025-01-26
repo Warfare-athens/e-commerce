@@ -20,8 +20,8 @@ function UserCartItemsContent({ cartItem }) {
       dispatch(
         updateCartQuantity({
           userId: user.id,
-          productId: cartItem.productId,
-          quantity: typeOfAction === "plus" ? cartItem.quantity + 1 : cartItem.quantity - 1,
+          productId: cartItem?.productId,
+          quantity: typeOfAction === "plus" ? cartItem?.quantity + 1 : cartItem?.quantity - 1,
         })
       ).then((data) => {
         if (data?.payload?.success) {
@@ -32,8 +32,8 @@ function UserCartItemsContent({ cartItem }) {
       });
     } else {
       // Use Redux action to update localCartItems
-      const newQuantity = typeOfAction === "plus" ? cartItem.quantity + 1 : cartItem.quantity - 1;
-      dispatch(updateLocalCartItem({ productId: cartItem.productId, quantity: newQuantity }));
+      const newQuantity = typeOfAction === "plus" ? cartItem?.quantity + 1 : cartItem?.quantity - 1;
+      dispatch(updateLocalCartItem({ productId: cartItem?.productId, quantity: newQuantity }));
   
       toast({
         title: "Cart item is updated successfully",
@@ -44,7 +44,7 @@ function UserCartItemsContent({ cartItem }) {
 
   const handleDeleteCartItem = () => {
     if (user) {
-      dispatch(deleteCartItem({ userId: user.id, productId: cartItem.productId })).then((data) => {
+      dispatch(deleteCartItem({ userId: user.id, productId: cartItem?.productId })).then((data) => {
         if (data?.payload?.success) {
           toast({
             title: "Item removed from cart",
@@ -52,7 +52,7 @@ function UserCartItemsContent({ cartItem }) {
         }
       });
     } else {
-      dispatch(removeLocalCartItem({ productId: cartItem.productId}));
+      dispatch(removeLocalCartItem({ productId: cartItem?.productId}));
       setLocalCartItems(updatedItems);
       toast({
         title: "Item removed from cart",
@@ -63,7 +63,7 @@ function UserCartItemsContent({ cartItem }) {
   return (
     <div className="flex items-center mx-2  p-2 border border-neutral-300 rounded">
       <img
-        src={cartItem?.images[0]}
+        src={cartItem?.images?.[0] }
         alt={cartItem?.title}
         className="sm:min-w-24 sm:h-24 w-16 h-16 bg-neutral-200 mr-2 sm:mr-3 rounded object-cover"
       />
@@ -74,7 +74,7 @@ function UserCartItemsContent({ cartItem }) {
             <h3 className="font-satoshi text-sm sm:text-base">{cartItem?.title}</h3>
           </div>
           <div>
-            <p className="font-satoshi-medium text-sm sm:text-base">₹{cartItem.price}</p>
+            <p className="font-satoshi-medium text-sm sm:text-base">₹{cartItem?.price}</p>
           </div>
         </div>
         <div className="flex items-center justify-between w-full gap-2 mt-1">

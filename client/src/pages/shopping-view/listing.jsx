@@ -42,7 +42,7 @@ function ShoppingListing() {
   );
   // const { cartItems } = useSelector((state) => state.shopCart);
   const { user } = useSelector((state) => state.auth);
-  console.log('listing page user:::::::::' , user);
+  // console.log('listing page user:::::::::' , user);
   
   const navigate = useNavigate();
   const [filters, setFilters] = useState({});
@@ -87,9 +87,6 @@ function ShoppingListing() {
 
 
   const handleAddToCart = (product) => {
-    // console.log('prodcut----------------',product);
-    // console.log( 'user id check in handle Add to cart ----------' , user);
-    
     if (!user){
       // Logic for unauthenticated user
       // console.log( 'we are in else block');
@@ -156,18 +153,19 @@ function ShoppingListing() {
               {productList?.length} Products
             </span>
             <ProductFilter filters={filters} handleFilter={handleFilter} />
+
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex items-center gap-1"
+                  className="flex  items-center gap-1"
                 >
                   <ArrowUpDownIcon className="h-4 w-4" />
                   <span>Sort by</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-[200px]">
+              <DropdownMenuContent align="end" className="w-[200px] font-satoshi">
                 <DropdownMenuRadioGroup value={sort} onValueChange={handleSort}>
                   {sortOptions.map((sortItem) => (
                     <DropdownMenuRadioItem
@@ -180,6 +178,7 @@ function ShoppingListing() {
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
+          
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4  gap-2 md:gap-4  mt-4">

@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { SheetContent, SheetFooter, SheetHeader, SheetTitle } from "../ui/sheet";
 import UserCartItemsContent from "./cart-items-content";
+import { useSelector } from "react-redux";
+import { BsCartX } from "react-icons/bs";
+
 
 
 
@@ -14,7 +17,9 @@ import UserCartItemsContent from "./cart-items-content";
 function UserCartWrapper({ combinedCartItems, setOpenCartSheet }) {
   const navigate = useNavigate();
 
-  // const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  
+  // console.log("combinedCartItems in cart wrapper" ,combinedCartItems)
   // console.log("user in cart wrapper" , user)
   // const { cartItems } = useSelector((state) => state.shopCart);
   // const { localCartItems } = useSelector((state) => state.localCart); // Access localCartItems from Redux
@@ -38,7 +43,7 @@ function UserCartWrapper({ combinedCartItems, setOpenCartSheet }) {
     0
   );
 
-console.log('combinedCart items in wrapper ---------------------',combinedCartItems);
+// console.log('combinedCart items in wrapper ---------------------',combinedCartItems);
 
 
 
@@ -97,12 +102,16 @@ console.log('combinedCart items in wrapper ---------------------',combinedCartIt
           </div>
       </div>
 
-      <div className="mt-8 text-black  space-y-4">
-        {combinedCartItems
-            ? combinedCartItems.map((item) => (
+      <div className="mt-8 text-black  space-y-4">  
+        {combinedCartItems && combinedCartItems?.length > 0
+            ? combinedCartItems?.map((item) => (
                 <UserCartItemsContent key={item.productId} cartItem={item} />
             ))
-          : <p>Your cart is empty.</p>}
+          : <div className="flex flex-col items-center  text-black font-satoshi-light ">
+              < BsCartX className="text-6xl text-red-500 mt-28"> </BsCartX>
+              <p className=" text-2xl mt-4">Your cart is empty.</p>
+            </div>
+        }
       </div>
 
 
@@ -113,7 +122,8 @@ console.log('combinedCart items in wrapper ---------------------',combinedCartIt
         </div>
         <Button
           onClick={() => {
-            navigate("/checkout");
+            if (!user) navigate("/auth/register");
+            else navigate("/checkout");
             setOpenCartSheet(false);
           }}
           className="w-full h-[45px]  font-satoshi-medium"

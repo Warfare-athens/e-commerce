@@ -4,59 +4,29 @@ function CheckAuth({ isAuthenticated, user, children }) {
   const location = useLocation();
 
 
-
-  // Redirect non-admin users away from admin routes
-  if (location.pathname.includes("admin") && user?.role !== "admin") {
-    return <Navigate to="/unauth-page" />;
+  if (
+    isAuthenticated &&
+    (location.pathname.includes("/login") ||
+      location.pathname.includes("/register"))
+  ) {
+      return <Navigate to="/" />;
   }
 
-  // Allow access to the requested route
-  return <>{children}</>;
-}
 
-export default CheckAuth;
-
-
-
-
-
-// import { Navigate, useLocation } from "react-router-dom";
-
-// function CheckAuth({ isAuthenticated, user, children }) {
-//   const location = useLocation();
-
-//   console.log(location.pathname, isAuthenticated);
+  if (
+    isAuthenticated && user?.role !== "admin" &&
+    location.pathname.includes("admin")
+  ) {
+    return <Navigate to="/" />;
+  }
+  if (!isAuthenticated  &&location.pathname.includes("admin")) {
+    return <Navigate to="/" />;
+  }
 
   
 
-//   // Allow access to the /shop route without authentication
-//   if (location.pathname.startsWith("/shop")) {
-//     return <>{children}</>;
-//   }
 
+      return <>{children}</>;
+}
 
-
-//   if (
-//     isAuthenticated &&
-//     (location.pathname.includes("/login") ||
-//       location.pathname.includes("/register"))
-//   ) {
-//     if (user?.role === "admin") {
-//       return <Navigate to="/admin/dashboard" />;
-//     } else {
-//       return <Navigate to="/shop/home" />;
-//     }
-//   }
-
-//   if (
-//     isAuthenticated &&
-//     user?.role !== "admin" &&
-//     location.pathname.includes("admin")
-//   ) {
-//     return <Navigate to="/unauth-page" />;
-//   }
-
-//   return <>{children}</>;
-// }
-
-// export default CheckAuth;
+export default CheckAuth;

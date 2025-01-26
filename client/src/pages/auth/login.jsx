@@ -36,13 +36,13 @@ function AuthLogin() {
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-3xl font-satoshi-medium tracking-tight text-foreground">
           Sign in to your account
         </h1>
-        <p className="mt-2">
+        <p className="mt-2 font-satoshi">
           Don't have an account
           <Link
-            className="font-medium ml-2 text-primary hover:underline"
+            className="font-satoshi-medium ml-2  text-blue-600  hover:underline"
             to="/auth/register"
           >
             Register

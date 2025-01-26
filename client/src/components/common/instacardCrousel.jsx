@@ -94,7 +94,7 @@ const ImageSlider = () => {
         if (width < 450) {
           setVisibleCount(3); // sm: 3 images
           setImageWidth("50%"); // sm: 40% width
-        } else if (width < 600) {
+        } else if (width < 750) {
           setVisibleCount(5); // md: 5 images
           setImageWidth("40%"); // md: 30% width
         } else if (width < 900) {
@@ -177,7 +177,7 @@ const ImageSlider = () => {
                   </div>
                 </div>
 
-                <span className="font-satoshi-medium">{post.name}</span>
+                <span className="font-satoshi-medium text-sm">{post.name}</span>
                 </div>
                 <div className="flex items-center space-x-2 mr-2">
                 <button
@@ -199,8 +199,8 @@ const ImageSlider = () => {
 
             <div className="w-full bg-white ">
 
-            <div className="  w-full bg-white flex justify-between p-4">
-              <div className="flex space-x-4">
+            <div className="  w-full bg-white flex justify-between p-2 md:p-4">
+              <div className="flex space-x-3 md:space-x-4">
                   <Heart strokeWidth={0} className="h-5 w-5 text-white  fill-red-500" />
                   <MessageCircle className="h-5 w-5" />
                   <Send className="h-5 w-5" />
@@ -208,7 +208,7 @@ const ImageSlider = () => {
                 <Bookmark className="h-5 w-5" />
             </div>
 
-            <div className=" flex -space-x-1 pl-4 pb-2 overflow-hidden">
+            <div className=" flex -space-x-1 md:pl-4 pl-2 pb-2 overflow-hidden">
             <img
               alt=""
               src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -227,7 +227,7 @@ const ImageSlider = () => {
               <p className=" text-xs font-satoshi-medium pl-2"> Liked by <span className="font-satoshi-bold"> {post.likes}</span></p>
             </div>
 
-            <div className=" flex font-satoshi px-4 pb-4 overflow-hidden">
+            <div className=" flex font-satoshi px-2 md:px-4 pb-4 overflow-hidden">
               <p className=" text-[12px]">{post.description}</p>
             </div>
 

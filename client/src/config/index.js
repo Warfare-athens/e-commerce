@@ -88,12 +88,12 @@ export const registerFormControls = [
       name: "brand",
       componentType: "select",
       options: [
-        { id: "nike", label: "Nike" },
-        { id: "adidas", label: "Adidas" },
-        { id: "puma", label: "Puma" },
-        { id: "levi", label: "Levi's" },
-        { id: "zara", label: "Zara" },
-        { id: "h&m", label: "H&M" },
+        { id: "serum", label: "Serum" },
+        { id: "moisturizer", label: "Moisturizer" },
+        { id: "facewash", label: "Facewash" },
+        { id: "eyecream", label: "Eye Cream" },
+        { id: "supplements", label: "Supplements" },
+        { id: "tablets", label: "Tablets" },
       ],
     },
     {
@@ -139,43 +139,28 @@ export const registerFormControls = [
   
   export const shoppingViewHeaderMenuItems = [
     {
-      id: "all",
+      id: "",
       label: "All",
       path: "/listing",
     },
     {
-      id: "skincare",
-      label: "Skincare",
+      id: "skin",
+      label: "Skin care",
       path: "/listing",
     },
     {
-      id: "facecare",
-      label: "Facecare",
+      id: "face",
+      label: "Face care",
       path: "/listing",
     },
     {
-      id: "men",
-      label: "Men",
-      path: "/listing",
-    },
-    {
-      id: "women",
-      label: "Women",
-      path: "/listing",
-    },
-    {
-      id: "eye",
-      label: "Eye",
-      path: "/listing",
-    },
-    {
-      id: "braincare",
+      id: "brain",
       label: "Brain Care",
       path: "/listing",
     },
     {
       id: "sleep",
-      label: "Sleep",
+      label: "Sleep Help",
       path: "/listing",
     },
     {
@@ -193,42 +178,38 @@ export const registerFormControls = [
   export const categoryOptionsMap = {
     men: "Men",
     women: "Women",
-    kids: "Kids",
-    accessories: "Accessories",
-    footwear: "Footwear",
+    skin: "Skin Care",
+    face : "Face Care",
+    sleep: "Sleep Help",
+    brain: "Brain Health",
+    supplements: "Supplements" 
   };
   
   export const brandOptionsMap = {
-    nike: "Nike",
-    adidas: "Adidas",
-    puma: "Puma",
-    levi: "Levi",
-    zara: "Zara",
-    "h&m": "H&M",
+    serum: "Serum", 
+    moisturizer :"Moisturizer" ,
+    facewash: "Facewash" ,
+    eyecream: "Eye Cream" ,
+    supplements: "Supplements" ,
+    tablets: "Tablets"
   };
   
   export const filterOptions = {
     category: [
       { id: "men", label: "Men" },
       { id: "women", label: "Women" },
-      { id: "kids", label: "Kids" },
-      { id: "accessories", label: "Accessories" },
-      { id: "footwear", label: "Footwear" },
-      { id: "skin", label: "Skin" },
-      { id: "face", label: "Face" },
-      { id: "sleep", label: "Sleep" },
-      { id: "brain", label: "Brain" },
+      { id: "skin", label: "Skin Care" },
+      { id: "face", label: "Face Care" },
+      { id: "sleep", label: "Sleep Help" },
+      { id: "brain", label: "Brain Health" },
       { id: "supplements", label: "Supplements" },
     ],
     sub_category: [
-      { id: "nike", label: "Nike" },
-      { id: "adidas", label: "Adidas" },
-      { id: "puma", label: "Puma" },
-      { id: "levi", label: "Levi's" },
-      { id: "zara", label: "Zara" },
-      { id: "h&m", label: "H&M" },
       { id: "serum", label: "Serum" },
       { id: "moisturizer", label: "Moisturizer" },
+      { id: "facewash", label: "Facewash" },
+      { id: "eyecream", label: "Eye Cream" },
+      { id: "supplements", label: "Supplements" },
       { id: "tablets", label: "Tablets" },
     ],
   };

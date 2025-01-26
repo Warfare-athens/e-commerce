@@ -201,7 +201,7 @@ function ShoppingHome() {
           }
           className="absolute h-20 rounded-none top-1/2 left-0  transform -translate-y-1/2 "
         >
-          <AiOutlineCaretLeft className=" h-10 w-10 md:h-12 md:w-12  text-white/70 " />
+          <AiOutlineCaretLeft className=" h-10 w-10 md:h-12 md:w-12  text-white/50 " />
         </button>
         <button
           onClick={() =>
@@ -211,7 +211,7 @@ function ShoppingHome() {
           }
           className="absolute h-20 rounded-none top-1/2 right-0  transform -translate-y-1/2 "
         >
-          <AiOutlineCaretRight className=" h-10 w-10 md:h-12 md:w-12 text-white/70 " />
+          <AiOutlineCaretRight className=" h-10 w-10 md:h-12 md:w-12 text-white/50 " />
         </button>
       </div> 
 
