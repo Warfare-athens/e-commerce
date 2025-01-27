@@ -1,0 +1,12 @@
+## .env file -
+```
+MONGO_URL = 
+PORT = 5000
+CLOUDINARY_NAME = 
+CLOUDINARY_API_KEY = 
+CLOUDINARY_API_SECRET =
+CLOUDINARY_URL = 
+CLIENT_URL = http://localhost:5173
+VITE_API_URL = http://localhost:5000
+
+```
